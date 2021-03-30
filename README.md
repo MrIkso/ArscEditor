@@ -7,7 +7,7 @@ An open source editor for resources.arsc with GUI.
 
 This tool used this open source project
 - [ArscBlamer](https://github.com/google/android-arscblamer) for parsing and editing resources.arsc files
-- [Java NIO2 File API](https://github.com/robolectric/robolectric) for back convert values to binary format
+- [robolectric](https://github.com/robolectric/robolectric) for back convert values to binary format
 
 ## License
 
