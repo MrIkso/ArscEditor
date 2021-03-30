@@ -1,0 +1,34 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    compileOnly 'org.jetbrains:annotations:20.1.0'
+
+    testCompileOnly 'org.jetbrains:annotations:20.1.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+application {
+    applicationName = 'arsceditor'
+    mainClassName = 'com.mrikso.arsceditor.App'
+}
+
+jar{
+    manifest{
+        attributes 'Main-Class':'com.mrikso.arsceditor.App'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
