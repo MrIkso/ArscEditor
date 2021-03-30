@@ -21,11 +21,11 @@ application {
 }
 
 jar{
-    manifest{
-        attributes 'Main-Class':'com.mrikso.arsceditor.App'
-    }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest {
+        attributes(
+                "Main-Class": mainClassName,
+                "Class-Path": configurations.runtimeClasspath.collect { it.getName() }.join(' ')
+        )
     }
 }
 

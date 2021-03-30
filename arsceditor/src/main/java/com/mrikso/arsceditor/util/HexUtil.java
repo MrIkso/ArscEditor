@@ -65,4 +65,12 @@ public class HexUtil {
         return new String(data, StandardCharsets.UTF_8);
     }
 
+    public static int parseInt(String valueFor) {
+        if (valueFor.startsWith("0x")) {
+            return Integer.parseInt(valueFor.substring(2), 16);
+        } else {
+            return Integer.parseInt(valueFor, 10);
+        }
+    }
+
 }

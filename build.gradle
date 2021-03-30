@@ -1,3 +1,5 @@
+ext.appVersion = "1.0.0"
+
 allprojects {
     apply plugin: 'java'
 
@@ -7,4 +9,36 @@ allprojects {
     compileJava {
         options.encoding = "UTF-8"
     }
+
+    jar {
+        manifest {
+            mainAttributes('arseditor-version': appVersion)
+        }
+    }
 }
+
+task copyArtifacts(type: Sync, dependsOn: ['arsceditor:installDist']) {
+    destinationDir file("$buildDir/arsceditor")
+    ['arsceditor'].each {
+        from tasks.getByPath(":${it}:installDist").destinationDir
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+task pack(type: Zip, dependsOn: copyArtifacts) {
+    destinationDirectory = buildDir
+    archiveFileName = "ArscEditor-${appVersion}.zip"
+    from copyArtifacts.destinationDir
+}
+
+task dist(dependsOn: [pack]) {
+    group 'arsceditor'
+    description = 'Build app distribution zip'
+}
+
+task cleanBuildDir(type: Delete) {
+    group 'arsceditor'
+    delete buildDir
+}
+
+clean.dependsOn(cleanBuildDir)

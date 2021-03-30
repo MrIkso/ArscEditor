@@ -9,7 +9,6 @@ import com.mrikso.arsceditor.model.ResourceTypeTableModel;
 import com.mrikso.arsceditor.valueeditor.ValueHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pink.madis.apk.arsc.*;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;

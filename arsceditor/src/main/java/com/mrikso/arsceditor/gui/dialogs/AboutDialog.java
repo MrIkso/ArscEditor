@@ -1,5 +1,7 @@
 package com.mrikso.arsceditor.gui.dialogs;
 
+import com.mrikso.arsceditor.util.VersionUtils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +34,7 @@ public class AboutDialog extends JDialog {
         label.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
         listPane.add(label);
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
-        listPane.add(new JLabel(String.format("Version: %s", "1.0.0")));
+        listPane.add(new JLabel(String.format("Version: %s", VersionUtils.getVersion())));
         listPane.add(Box.createRigidArea(new Dimension(0, 5)));
         listPane.add(new JLabel("Author: Mr Ikso"));
         listPane.add(Box.createRigidArea(new Dimension(0, 20)));

@@ -3,12 +3,11 @@ package com.mrikso.arsceditor.model;
 import com.google.devrel.gmscore.tools.apk.arsc.*;
 import com.mrikso.arsceditor.gui.tree.ResourceDirectory;
 import com.mrikso.arsceditor.gui.tree.ResourceEntry;
-import com.mrikso.arsceditor.util.XmlGenUtils;
+import com.mrikso.arsceditor.util.DecodeGenUtils;
 import com.mrikso.arsceditor.valueeditor.FormatValue;
 import com.mrikso.arsceditor.valueeditor.ValueHelper;
 import com.mrikso.arsceditor.valueeditor.ValueType;
 import org.jetbrains.annotations.NotNull;
-import pink.madis.apk.arsc.*;
 
 import java.util.Map;
 
@@ -112,7 +111,7 @@ public class ResourceModel {
             return new FormatValue(ValueType.TYPE_STRING, stringPool.getString(value.data()), value.data());
         }
 
-        return XmlGenUtils.formatValue(value, stringPool);
+        return DecodeGenUtils.formatValue(value, stringPool);
     }
 
     public ResourceDirectory getRoot() {

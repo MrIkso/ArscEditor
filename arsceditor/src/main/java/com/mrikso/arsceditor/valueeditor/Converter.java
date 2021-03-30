@@ -1,9 +1,9 @@
 package com.mrikso.arsceditor.valueeditor;
 
+import com.mrikso.arsceditor.util.HexUtil;
 import com.mrikso.arsceditor.util.ResourceHelper;
 import com.mrikso.arsceditor.util.ResourceHelper2;
 import com.mrikso.arsceditor.util.TypedValue;
-import com.mrikso.arsceditor.util.Util;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.google.devrel.gmscore.tools.apk.arsc.BinaryResourceValue;
@@ -38,16 +38,16 @@ public class Converter {
                 return new BinaryResourceValue(size,BinaryResourceValue.Type.FRACTION, typedValue.data);
             case TYPE_ATTRIBUTE:
                 return new BinaryResourceValue(size,BinaryResourceValue.Type.ATTRIBUTE,
-                        Util.parseInt(value.substring(1)));
+                        HexUtil.parseInt(value.substring(1)));
             case TYPE_DIMENSION:
                 ResourceHelper2.parseFloatAttribute(null, value, typedValue, true);
                 return new BinaryResourceValue(size,BinaryResourceValue.Type.DIMENSION, typedValue.data);
             case TYPE_REFERENCE:
                 return new BinaryResourceValue(size,BinaryResourceValue.Type.REFERENCE,
-                        Util.parseInt(value.substring(1)));
+                        HexUtil.parseInt(value.substring(1)));
             case TYPE_DYNAMIC_REFERENCE:
                 return new BinaryResourceValue(size,BinaryResourceValue.Type.DYNAMIC_REFERENCE,
-                        Util.parseInt(value.substring(1)));
+                        HexUtil.parseInt(value.substring(1)));
         }
         return null;
     }

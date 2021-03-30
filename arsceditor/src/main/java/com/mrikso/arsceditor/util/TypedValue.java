@@ -187,7 +187,7 @@ public class TypedValue {
 
     private static final float MANTISSA_MULT =
             1.0f / (1<<TypedValue.COMPLEX_MANTISSA_SHIFT);
-    private static final float[] RADIX_MULTS = new float[] {
+    public static final float[] RADIX_MULTS = new float[] {
             1.0f*MANTISSA_MULT, 1.0f/(1<<7)*MANTISSA_MULT,
             1.0f/(1<<15)*MANTISSA_MULT, 1.0f/(1<<23)*MANTISSA_MULT
     };

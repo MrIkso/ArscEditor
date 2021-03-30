@@ -10,20 +10,20 @@ import com.google.devrel.gmscore.tools.apk.arsc.StringPoolChunk;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class XmlGenUtils {
+public class DecodeGenUtils {
 
     public static String decodeComplex(int data, boolean isFraction) {
-        double value = (data & ParserConstants.COMPLEX_MANTISSA_MASK << ParserConstants.COMPLEX_MANTISSA_SHIFT)
-                * ParserConstants.RADIX_MULTS[data >> ParserConstants.COMPLEX_RADIX_SHIFT & ParserConstants.COMPLEX_RADIX_MASK];
-        int unitType = data & ParserConstants.COMPLEX_UNIT_MASK;
+        double value = (data & TypedValue.COMPLEX_MANTISSA_MASK << TypedValue.COMPLEX_MANTISSA_SHIFT)
+                * TypedValue.RADIX_MULTS[data >> TypedValue.COMPLEX_RADIX_SHIFT & TypedValue.COMPLEX_RADIX_MASK];
+        int unitType = data & TypedValue.COMPLEX_UNIT_MASK;
         String unit;
         if (isFraction) {
             value *= 100;
             switch (unitType) {
-                case ParserConstants.COMPLEX_UNIT_FRACTION:
+                case TypedValue.COMPLEX_UNIT_FRACTION:
                     unit = "%";
                     break;
-                case ParserConstants.COMPLEX_UNIT_FRACTION_PARENT:
+                case TypedValue.COMPLEX_UNIT_FRACTION_PARENT:
                     unit = "%p";
                     break;
 
@@ -32,22 +32,22 @@ public class XmlGenUtils {
             }
         } else {
             switch (unitType) {
-                case ParserConstants.COMPLEX_UNIT_PX:
+                case TypedValue.COMPLEX_UNIT_PX:
                     unit = "px";
                     break;
-                case ParserConstants.COMPLEX_UNIT_DIP:
+                case TypedValue.COMPLEX_UNIT_DIP:
                     unit = "dp";
                     break;
-                case ParserConstants.COMPLEX_UNIT_SP:
+                case TypedValue.COMPLEX_UNIT_SP:
                     unit = "sp";
                     break;
-                case ParserConstants.COMPLEX_UNIT_PT:
+                case TypedValue.COMPLEX_UNIT_PT:
                     unit = "pt";
                     break;
-                case ParserConstants.COMPLEX_UNIT_IN:
+                case TypedValue.COMPLEX_UNIT_IN:
                     unit = "in";
                     break;
-                case ParserConstants.COMPLEX_UNIT_MM:
+                case TypedValue.COMPLEX_UNIT_MM:
                     unit = "mm";
                     break;
 
@@ -95,11 +95,11 @@ public class XmlGenUtils {
                         ? stringPool.getString(data)
                         : String.format(Locale.US, "@string/0x%1$x", data), data);
             case DIMENSION:
-                return new FormatValue(ValueType.TYPE_DIMENSION, XmlGenUtils.decodeComplex(data, false));
+                return new FormatValue(ValueType.TYPE_DIMENSION, decodeComplex(data, false));
             case FRACTION:
-                return new FormatValue(ValueType.TYPE_FRACTION, XmlGenUtils.decodeComplex(data, true));
+                return new FormatValue(ValueType.TYPE_FRACTION, decodeComplex(data, true));
             case FLOAT:
-                return new FormatValue(ValueType.TYPE_FLOAT, XmlGenUtils.floatToString(Float.intBitsToFloat(data)));
+                return new FormatValue(ValueType.TYPE_FLOAT, floatToString(Float.intBitsToFloat(data)));
             case INT_DEC:
                 return new FormatValue(ValueType.TYPE_INT_DEC, Integer.toString(data));
             case INT_HEX:
