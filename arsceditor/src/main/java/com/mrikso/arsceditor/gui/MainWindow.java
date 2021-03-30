@@ -121,7 +121,7 @@ public class MainWindow extends JFrame implements TableChangedListener {
 
     private void gitHomepage() {
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/MrIkso/ArscEitor"));
+            Desktop.getDesktop().browse(new URI("https://github.com/MrIkso/ArscEditor"));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                     this,
