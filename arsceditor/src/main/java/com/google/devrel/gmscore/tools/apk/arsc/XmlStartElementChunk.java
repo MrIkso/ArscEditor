@@ -18,14 +18,13 @@ package com.google.devrel.gmscore.tools.apk.arsc;
 
 import com.google.common.base.Preconditions;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 /** Represents the beginning of an XML node. */
 public final class XmlStartElementChunk extends XmlNodeChunk {
@@ -109,7 +108,7 @@ public final class XmlStartElementChunk extends XmlNodeChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_START_ELEMENT;
+    return Type.XML_START_ELEMENT;
   }
 
   @Override

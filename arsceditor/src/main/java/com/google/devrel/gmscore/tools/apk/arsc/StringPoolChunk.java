@@ -20,14 +20,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.io.LittleEndianDataOutputStream;
 
+import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.*;
-
-import javax.annotation.Nullable;
 
 /** Represents a string pool structure. */
 public final class StringPoolChunk extends Chunk {
@@ -117,19 +116,13 @@ public final class StringPoolChunk extends Chunk {
     return strings.get(index);
   }
 
-  public void setString(int index, String value) {
+  public void updateString(int index, String value){
     strings.set(index, value);
   }
 
   /** Returns the number of strings in this pool. */
   public int getStringCount() {
     return strings.size();
-  }
-
-
-  /** Returns all strings in this pool. */
-  public List<String> getStrings() {
-    return strings;
   }
 
   /**
@@ -154,7 +147,7 @@ public final class StringPoolChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.STRING_POOL;
+    return Type.STRING_POOL;
   }
 
   /** Returns the number of bytes needed for offsets based on {@code strings} and {@code styles}. */
@@ -232,7 +225,7 @@ public final class StringPoolChunk extends Chunk {
   private int writeStyles(DataOutput payload, ByteBuffer offsets, boolean shrink)
       throws IOException {
     int styleOffset = 0;
-    if (styles.size() > 0) {
+        if (!styles.isEmpty()) {
       Map<StringPoolStyle, Integer> used = new HashMap<>();  // Keeps track of bytes already written
       for (StringPoolStyle style : styles) {
         if (!used.containsKey(style) || !shrink) {

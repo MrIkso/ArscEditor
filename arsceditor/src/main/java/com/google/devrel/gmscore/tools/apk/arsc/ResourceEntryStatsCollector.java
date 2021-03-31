@@ -17,17 +17,14 @@
 package com.google.devrel.gmscore.tools.apk.arsc;
 
 import com.google.common.base.Preconditions;
+import com.google.devrel.gmscore.tools.apk.arsc.ArscBlamer.ResourceEntry;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
- * Calculates extra information about an {@link ArscBlamer.ResourceEntry}, such as the total
+ * Calculates extra information about an {@link ResourceEntry}, such as the total
  * APK size the entry is responsible for.
  *
  * This class is not thread-safe.
@@ -46,7 +43,7 @@ public class ResourceEntryStatsCollector {
    */
   private static final int PACKAGE_CHUNK_OVERHEAD = 8;
 
-  private final Map<ArscBlamer.ResourceEntry, ResourceStatistics> stats = new HashMap<>();
+  private final Map<ResourceEntry, ResourceStatistics> stats = new HashMap<>();
 
   private final ArscBlamer blamer;
 
@@ -71,13 +68,13 @@ public class ResourceEntryStatsCollector {
   }
 
   /** Returns entries for which there are computed stats. Must first call {@link #compute}. */
-  public Map<ArscBlamer.ResourceEntry, ResourceStatistics> getStats() {
+  public Map<ResourceEntry, ResourceStatistics> getStats() {
     Preconditions.checkState(!stats.isEmpty(), "Must call #compute() first.");
     return Collections.unmodifiableMap(stats);
   }
 
   /** Returns computed stats for a given entry. Must first call {@link #compute}. */
-  public ResourceStatistics getStats(ArscBlamer.ResourceEntry entry) {
+  public ResourceStatistics getStats(ResourceEntry entry) {
     Preconditions.checkState(!stats.isEmpty(), "Must call #compute() first.");
     return stats.containsKey(entry) ? stats.get(entry) : ResourceStatistics.EMPTY;
   }
@@ -95,28 +92,28 @@ public class ResourceEntryStatsCollector {
   }
 
   private void computeTypePoolSizes() throws IOException {
-    for (Entry<PackageChunk, List<ArscBlamer.ResourceEntry>[]> entry
+    for (Entry<PackageChunk, List<ResourceEntry>[]> entry
         : blamer.getTypeToBlamedResources().entrySet()) {
       computePoolSizes(entry.getKey().getTypeStringPool(), entry.getValue());
     }
   }
 
   private void computeKeyPoolSizes() throws IOException {
-    for (Entry<PackageChunk, List<ArscBlamer.ResourceEntry>[]> entry
+    for (Entry<PackageChunk, List<ResourceEntry>[]> entry
         : blamer.getKeyToBlamedResources().entrySet()) {
       computePoolSizes(entry.getKey().getKeyStringPool(), entry.getValue());
     }
   }
 
   private void computeTypeSpecSizes() {
-    for (Entry<PackageChunk, List<ArscBlamer.ResourceEntry>[]> entry
+    for (Entry<PackageChunk, List<ResourceEntry>[]> entry
         : blamer.getTypeToBlamedResources().entrySet()) {
       computeTypeSpecSizes(entry.getKey(), entry.getValue());
     }
   }
 
   private void computeTypeChunkSizes() {
-    for (Entry<TypeChunk.Entry, Collection<ArscBlamer.ResourceEntry>> entry
+    for (Entry<TypeChunk.Entry, Collection<ResourceEntry>> entry
         : blamer.getTypeEntryToBlamedResources().asMap().entrySet()) {
       TypeChunk.Entry chunkEntry = entry.getKey();
       TypeChunk typeChunk = chunkEntry.parent();
@@ -129,7 +126,7 @@ public class ResourceEntryStatsCollector {
   }
 
   private void computePackageChunkSizes() {
-    for (Entry<PackageChunk, Collection<ArscBlamer.ResourceEntry>> entry
+    for (Entry<PackageChunk, Collection<ResourceEntry>> entry
         : blamer.getPackageToBlamedResources().asMap().entrySet()) {
       int overhead = entry.getKey().getHeaderSize() + PACKAGE_CHUNK_OVERHEAD;
       addSizes(entry.getValue(), overhead, 0, 1);
@@ -137,7 +134,7 @@ public class ResourceEntryStatsCollector {
   }
 
   private void computePoolSizes(StringPoolChunk stringPool,
-      List<ArscBlamer.ResourceEntry>[] usages) throws IOException {
+      List<ResourceEntry>[] usages) throws IOException {
     int overhead = stringPool.getHeaderSize();
     if (stringPool.getStyleCount() > 0) {
       overhead += STYLE_OVERHEAD;
@@ -166,7 +163,7 @@ public class ResourceEntryStatsCollector {
   }
 
   private void computeTypeSpecSizes(PackageChunk packageChunk,
-      List<ArscBlamer.ResourceEntry>[] usages) {
+      List<ResourceEntry>[] usages) {
     for (int i = 0; i < usages.length; ++i) {
       // The 1 here is to convert back to a 1-based index.
       TypeSpecChunk typeSpec = packageChunk.getTypeSpecChunk(i + 1);
@@ -218,9 +215,9 @@ public class ResourceEntryStatsCollector {
    * @param size The size in bytes of a value in a chunk that {@code entries} reference.
    * @param count The total number of values in the chunk.
    */
-  private void addSizes(Collection<ArscBlamer.ResourceEntry> entries, int overhead, int size, int count) {
+  private void addSizes(Collection<ResourceEntry> entries, int overhead, int size, int count) {
     int usageCount = entries.size();
-    for (ArscBlamer.ResourceEntry resourceEntry : entries) {
+    for (ResourceEntry resourceEntry : entries) {
       // TODO(acornwall): Replace with Java 8's #getOrDefault when possible.
       if (!stats.containsKey(resourceEntry)) {
         stats.put(resourceEntry, new ResourceStatistics());
@@ -241,7 +238,7 @@ public class ResourceEntryStatsCollector {
     }
   }
 
-  /** Stats for an individual {@link ArscBlamer.ResourceEntry}. */
+  /** Stats for an individual {@link ResourceEntry}. */
   public static class ResourceStatistics {
 
     /** The empty, immutable instance of ResourceStatistics which contains 0 for all values. */

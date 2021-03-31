@@ -16,9 +16,8 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
-import java.nio.ByteBuffer;
-
 import javax.annotation.Nullable;
+import java.nio.ByteBuffer;
 
 /** Represents the starting tag of a namespace in an XML document. */
 public final class XmlNamespaceStartChunk extends XmlNamespaceChunk {
@@ -29,6 +28,6 @@ public final class XmlNamespaceStartChunk extends XmlNamespaceChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_START_NAMESPACE;
+    return Type.XML_START_NAMESPACE;
   }
 }

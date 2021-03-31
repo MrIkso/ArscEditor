@@ -20,14 +20,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.io.LittleEndianDataOutputStream;
 import com.google.common.primitives.UnsignedBytes;
 
+import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.*;
-
-import javax.annotation.Nullable;
 
 /**
  * Represents a type chunk, which contains the resource values for a specific resource type and
@@ -109,9 +108,8 @@ public final class TypeChunk extends Chunk {
 
   /** Returns a sparse list of 0-based indices to resource entries defined by this chunk. */
   public Map<Integer, Entry> getEntries() {
-    return /*Collections.unmodifiableMap(*/entries;
+    return Collections.unmodifiableMap(entries);
   }
-
 
   /** Returns true if this chunk contains an entry for {@code resourceId}. */
   public boolean containsResource(BinaryResourceIdentifier resourceId) {
@@ -170,12 +168,12 @@ public final class TypeChunk extends Chunk {
     return keyPool.getString(index);
   }
 
-  protected void setKeyName(int index, String value) {
+  protected void updateKey(int index, String value) {
     PackageChunk packageChunk = getPackageChunk();
     Preconditions.checkNotNull(packageChunk, "%s has no parent package.", getClass());
     StringPoolChunk keyPool = packageChunk.getKeyStringPool();
     Preconditions.checkNotNull(keyPool, "%s's parent package has no key pool.", getClass());
-    keyPool.setString(index, value);
+    keyPool.updateString(index, value);
   }
 
   @Nullable
@@ -199,7 +197,7 @@ public final class TypeChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_TYPE;
+    return Type.TABLE_TYPE;
   }
 
   /** Returns the number of bytes needed for offsets based on {@code entries}. */
@@ -341,9 +339,9 @@ public final class TypeChunk extends Chunk {
       return parent().getKeyName(keyIndex());
     }
 
-    /** Returns the key name identifying this resource entry. */
-    public final void setKey(int keyIndex, String value) {
-      parent().setKeyName(keyIndex, value);
+    /** Update the key name in this resource entry. */
+    public final void updateKey(int keyIndex, String value) {
+      parent().updateKey(keyIndex, value);
     }
 
     /** Returns true if this is a complex resource. */

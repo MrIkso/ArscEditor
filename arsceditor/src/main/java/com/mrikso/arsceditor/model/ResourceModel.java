@@ -31,77 +31,79 @@ public class ResourceModel {
 
     public void readTable() {
         root = new ResourceDirectory(String.format("Resource Table (%s)", tableName));
-        for (Map.Entry<Integer, TypeChunk.Entry> entry : type.getEntries().entrySet()) {
-            int entryIndex = entry.getKey();
-            BinaryResourceIdentifier id = BinaryResourceIdentifier.create(packageChunk.getId(), typeSpec.getId(), entry.getKey());
-            String idN = id.toString();
-            FormatValue valueNormal = null;
-            BinaryResourceValue value = entry.getValue().value();
+        if(type!=null) {
+            for (Map.Entry<Integer, TypeChunk.Entry> entry : type.getEntries().entrySet()) {
+                int entryIndex = entry.getKey();
+                BinaryResourceIdentifier id = BinaryResourceIdentifier.create(packageChunk.getId(), typeSpec.getId(), entry.getKey());
+                String idN = id.toString();
+                FormatValue valueNormal = null;
+                BinaryResourceValue value = entry.getValue().value();
 
-            ResourceDirectory resourceDirectory = new ResourceDirectory(idN);
-            resourceDirectory.setName(entry.getValue().key());
-            // set index in stringpool
-            resourceDirectory.setNameIndex(entry.getValue().keyIndex());
+                ResourceDirectory resourceDirectory = new ResourceDirectory(idN);
+                resourceDirectory.setName(entry.getValue().key());
+                // set index in stringpool
+                resourceDirectory.setNameIndex(entry.getValue().keyIndex());
 
-            // set index in typemap
-            resourceDirectory.setEntryIndex(entryIndex);
+                // set index in typemap
+                resourceDirectory.setEntryIndex(entryIndex);
 
-            ValueHelper.setTypeChunk(type);
+                ValueHelper.setTypeChunk(type);
 
-            if (value != null) {
-                valueNormal = formatValue(value);
-            }
+                if (value != null) {
+                    valueNormal = formatValue(value);
+                }
 
-            // add complex values (style, attr, plurals, array)
-            if (entry.getValue().isComplex()) {
-                resourceDirectory.setIsComplex(true);
-                // get map sub values
-                Map<Integer, BinaryResourceValue> values = entry.getValue().values();
-                if (values != null) {
-                    for (Map.Entry<Integer, BinaryResourceValue> valueEntry : values.entrySet()) {
-                        valueNormal = formatValue(valueEntry.getValue());
-                        int key = valueEntry.getKey();
-                        String idParent = String.format("0x%1$08x", key);
+                // add complex values (style, attr, plurals, array)
+                if (entry.getValue().isComplex()) {
+                    resourceDirectory.setIsComplex(true);
+                    // get map sub values
+                    Map<Integer, BinaryResourceValue> values = entry.getValue().values();
+                    if (values != null) {
+                        for (Map.Entry<Integer, BinaryResourceValue> valueEntry : values.entrySet()) {
+                            valueNormal = formatValue(valueEntry.getValue());
+                            int key = valueEntry.getKey();
+                            String idParent = String.format("0x%1$08x", key);
 
-                        ResourceEntry resourceEntry = new ResourceEntry(idParent);
-                        resourceEntry.setName(idParent);
-                        resourceEntry.setValue(valueNormal.getValue());
-                        resourceEntry.setValueType(valueNormal.getValueType());
-                        // value index if value type is string
-                        resourceEntry.setValueIndex(valueNormal.getIndex());
+                            ResourceEntry resourceEntry = new ResourceEntry(idParent);
+                            resourceEntry.setName(idParent);
+                            resourceEntry.setValue(valueNormal.getValue());
+                            resourceEntry.setValueType(valueNormal.getValueType());
+                            // value index if value type is string
+                            resourceEntry.setValueIndex(valueNormal.getIndex());
 
-                        // set parent index
-                        resourceEntry.setEntryIndex(entryIndex);
-                        // set children index
-                        resourceEntry.setEntryChildrenIndex(key);
+                            // set parent index
+                            resourceEntry.setEntryIndex(entryIndex);
+                            // set children index
+                            resourceEntry.setEntryChildrenIndex(key);
 
-                        resourceDirectory.add(resourceEntry);
+                            resourceDirectory.add(resourceEntry);
+                        }
                     }
                 }
-            }
-            // set simple values (string, colors, xml, etc.)
-            else {
-                if (valueNormal != null) {
-                    // set value
-                    resourceDirectory.setValue(valueNormal.getValue());
-                    // set value type(string, attr, color etc.)
-                    resourceDirectory.setValueType(valueNormal.getValueType());
-                    // set value index
-                    resourceDirectory.setValueIndex(valueNormal.getIndex());
+                // set simple values (string, colors, xml, etc.)
+                else {
+                    if (valueNormal != null) {
+                        // set value
+                        resourceDirectory.setValue(valueNormal.getValue());
+                        // set value type(string, attr, color etc.)
+                        resourceDirectory.setValueType(valueNormal.getValueType());
+                        // set value index
+                        resourceDirectory.setValueIndex(valueNormal.getIndex());
+                    }
                 }
-            }
 
-            // add parent references if type is style
-            if (type.getTypeName().equals("style")) {
-                int parentId = entry.getValue().parentEntry();
-                if (parentId != 0) {
-                    resourceDirectory.setValueType(ValueType.TYPE_REFERENCE);
-                    resourceDirectory.setValue(String.format("@0x%1$08x", parentId));
-                    resourceDirectory.setValueIndex(-1);
+                // add parent references if type is style
+                if (type.getTypeName().equals("style")) {
+                    int parentId = entry.getValue().parentEntry();
+                    if (parentId != 0) {
+                        resourceDirectory.setValueType(ValueType.TYPE_REFERENCE);
+                        resourceDirectory.setValue(String.format("@0x%1$08x", parentId));
+                        resourceDirectory.setValueIndex(-1);
+                    }
                 }
-            }
 
-            root.add(resourceDirectory);
+                root.add(resourceDirectory);
+            }
         }
     }
 

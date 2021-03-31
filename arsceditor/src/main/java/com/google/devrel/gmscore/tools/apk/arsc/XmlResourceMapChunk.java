@@ -16,13 +16,12 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 /**
  * Represents an XML resource map chunk.
@@ -73,7 +72,7 @@ public class XmlResourceMapChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_RESOURCE_MAP;
+    return Type.XML_RESOURCE_MAP;
   }
 
   @Override

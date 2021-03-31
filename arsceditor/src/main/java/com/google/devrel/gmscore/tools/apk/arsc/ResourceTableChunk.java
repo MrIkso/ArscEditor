@@ -18,13 +18,12 @@ package com.google.devrel.gmscore.tools.apk.arsc;
 
 import com.google.common.base.Preconditions;
 
+import javax.annotation.Nullable;
 import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 /**
  * Represents a resource table structure. Its sub-chunks contain:
@@ -64,10 +63,6 @@ public final class ResourceTableChunk extends ChunkWithChunks {
     Preconditions.checkNotNull(stringPool, "ResourceTableChunk must have a string pool.");
   }
 
-  public void setStringPool(StringPoolChunk stringPool) {
-    this.stringPool = stringPool;
-  }
-
   /** Returns the string pool containing all string resource values in the resource table. */
   public StringPoolChunk getStringPool() {
     return stringPool;
@@ -86,7 +81,7 @@ public final class ResourceTableChunk extends ChunkWithChunks {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE;
+    return Type.TABLE;
   }
 
   @Override

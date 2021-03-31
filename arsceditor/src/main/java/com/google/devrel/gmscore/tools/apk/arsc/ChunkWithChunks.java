@@ -16,13 +16,12 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 /** Represents a chunk whose payload is a list of sub-chunks. */
 public abstract class ChunkWithChunks extends Chunk {
@@ -44,7 +43,7 @@ public abstract class ChunkWithChunks extends Chunk {
     buffer.position(start);
 
     while (offset < end) {
-      Chunk chunk = newInstance(buffer, this);
+      Chunk chunk = Chunk.newInstance(buffer, this);
       chunks.put(offset, chunk);
       offset += chunk.getOriginalChunkSize();
     }

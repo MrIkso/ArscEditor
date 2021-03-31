@@ -19,11 +19,10 @@ package com.google.devrel.gmscore.tools.apk.arsc;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.UnsignedBytes;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import javax.annotation.Nullable;
 
 /** A chunk that contains a collection of resource entries for a particular resource data type. */
 public final class TypeSpecChunk extends Chunk {
@@ -61,7 +60,7 @@ public final class TypeSpecChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_TYPE_SPEC;
+    return Type.TABLE_TYPE_SPEC;
   }
 
   /** Returns the name of the type this chunk represents (e.g. string, attr, id). */

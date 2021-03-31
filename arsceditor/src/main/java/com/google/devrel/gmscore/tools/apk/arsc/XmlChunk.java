@@ -16,9 +16,8 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
-import java.nio.ByteBuffer;
-
 import javax.annotation.Nullable;
+import java.nio.ByteBuffer;
 
 /**
  * Represents an XML chunk structure.
@@ -34,7 +33,7 @@ public final class XmlChunk extends ChunkWithChunks {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML;
+    return Type.XML;
   }
 
   /** Returns a string at the provided (0-based) index if the index exists in the string pool. */

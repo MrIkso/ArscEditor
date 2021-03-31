@@ -16,11 +16,10 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import javax.annotation.Nullable;
 
 /** Represents the end of an XML node. */
 public final class XmlEndElementChunk extends XmlNodeChunk {
@@ -49,7 +48,7 @@ public final class XmlEndElementChunk extends XmlNodeChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_END_ELEMENT;
+    return Type.XML_END_ELEMENT;
   }
 
   @Override

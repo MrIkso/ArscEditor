@@ -16,15 +16,15 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
-import static java.nio.charset.StandardCharsets.UTF_16LE;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.google.common.primitives.UnsignedBytes;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+
+import static java.nio.charset.StandardCharsets.UTF_16LE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /** Provides utilities to decode/encode a String packed in an arsc resource file. */
 public final class BinaryResourceString {

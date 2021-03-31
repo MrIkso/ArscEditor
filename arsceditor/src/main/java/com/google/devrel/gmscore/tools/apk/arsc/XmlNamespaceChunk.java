@@ -16,11 +16,10 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import javax.annotation.Nullable;
 
 /** Represents the start/end of a namespace in an XML document. */
 public abstract class XmlNamespaceChunk extends XmlNodeChunk {

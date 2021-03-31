@@ -27,6 +27,7 @@ import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /** A package chunk is a collection of resource data types within a package. */
 public final class PackageChunk extends ChunkWithChunks {
@@ -38,7 +39,7 @@ public final class PackageChunk extends ChunkWithChunks {
   private static final int KEY_OFFSET_OFFSET = 276;
 
   /** The package id if this is a base package, or 0 if not a base package. */
-  private final int id;
+  private int id;
 
   /** The name of the package. */
   private String packageName;
@@ -64,6 +65,9 @@ public final class PackageChunk extends ChunkWithChunks {
   /** Contains a mapping of a type index to all of the {@link TypeChunk} with that index. */
   private final Multimap<Integer, TypeChunk> types = ArrayListMultimap.create();
 
+  /** May contain a library chunk for mapping dynamic references to resolved references. */
+  private Optional<LibraryChunk> libraryChunk = Optional.empty();
+
   protected PackageChunk(ByteBuffer buffer, @Nullable Chunk parent) {
     super(buffer, parent);
     id = buffer.getInt();
@@ -85,6 +89,12 @@ public final class PackageChunk extends ChunkWithChunks {
       } else if (chunk instanceof TypeSpecChunk) {
         TypeSpecChunk typeSpecChunk = (TypeSpecChunk) chunk;
         typeSpecs.put(typeSpecChunk.getId(), typeSpecChunk);
+      } else if (chunk instanceof LibraryChunk) {
+          if (libraryChunk.isPresent()) {
+              throw new IllegalStateException(
+                      "Multiple library chunks present in package chunk.");
+          }
+          libraryChunk = Optional.of((LibraryChunk) chunk);
       } else if (!(chunk instanceof StringPoolChunk)) {
         throw new IllegalStateException(
             String.format("PackageChunk contains an unexpected chunk: %s", chunk.getClass()));
@@ -97,6 +107,11 @@ public final class PackageChunk extends ChunkWithChunks {
     return id;
   }
 
+  /** Sets the package id */
+  public void setId(int id) {
+    this.id = id;
+  }
+
   /**
    * Returns the string pool that contains the names of the resources in this package.
    */
@@ -104,6 +119,19 @@ public final class PackageChunk extends ChunkWithChunks {
     Chunk chunk = Preconditions.checkNotNull(getChunks().get(keyStringsOffset + offset));
     Preconditions.checkState(chunk instanceof StringPoolChunk, "Key string pool not found.");
     return (StringPoolChunk) chunk;
+  }
+
+  /**
+   * Get the type string for a specific id, e.g., (e.g. string, attr, id).
+   *
+   * @param id The id to get the type for.
+   * @return The type string.
+   */
+  public String getTypeString(int id) {
+    StringPoolChunk typePool = getTypeStringPool();
+    Preconditions.checkNotNull(typePool, "Package has no type pool.");
+    Preconditions.checkState(typePool.getStyleCount() >= id, "No type for id: " + id);
+    return typePool.getString(id - 1); // - 1 here to convert to 0-based index
   }
 
   /**
@@ -168,14 +196,14 @@ public final class PackageChunk extends ChunkWithChunks {
     return packageName;
   }
 
-  /** Set the name of this package. */
-  public void setPackageName(String packageNameNew) {
-    this.packageName = packageNameNew;
+  /** Set the package name */
+  public void setPackageName(String packageName) {
+    this.packageName = packageName;
   }
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_PACKAGE;
+    return Type.TABLE_PACKAGE;
   }
 
   @Override

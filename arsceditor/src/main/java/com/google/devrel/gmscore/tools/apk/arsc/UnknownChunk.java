@@ -16,11 +16,10 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import javax.annotation.Nullable;
 
 /**
  * A chunk whose contents are unknown. This is a placeholder until we add a proper chunk for the
@@ -38,7 +37,7 @@ public final class UnknownChunk extends Chunk {
     super(buffer, parent);
 
     type = Type.fromCode(buffer.getShort(offset));
-    header = new byte[headerSize - METADATA_SIZE];
+    header = new byte[headerSize - Chunk.METADATA_SIZE];
     payload = new byte[chunkSize - headerSize];
     buffer.get(header);
     buffer.get(payload);

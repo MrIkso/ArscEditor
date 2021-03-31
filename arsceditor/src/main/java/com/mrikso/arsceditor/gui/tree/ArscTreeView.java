@@ -4,6 +4,7 @@ import com.google.devrel.gmscore.tools.apk.arsc.*;
 import com.mrikso.arsceditor.gui.MainWindow;
 import com.mrikso.arsceditor.gui.dialogs.ErrorDialog;
 import com.mrikso.arsceditor.gui.dialogs.PackageEditDialog;
+import com.mrikso.arsceditor.intrefaces.TableChangedListener;
 import com.mrikso.arsceditor.model.ResourceModel;
 import com.mrikso.arsceditor.model.ResourceTypeTableModel;
 import com.mrikso.arsceditor.valueeditor.ValueHelper;
@@ -26,7 +27,7 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
     protected MainWindow mainWindow;
     @NotNull
     private ArscNode selectedNode;
-    private ResourceTableChunk resourceTableChunk;
+    private TableChangedListener tableChangedListener;
 
     public ArscTreeView() {
 
@@ -61,7 +62,7 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
         }
 
         for (Chunk chunk : chunks) {
-            resourceTableChunk = (ResourceTableChunk) chunk;
+            ResourceTableChunk resourceTableChunk = (ResourceTableChunk) chunk;
             ValueHelper.setResourceTableChunk(resourceTableChunk);
             ValueHelper.setStringPoolChunk(resourceTableChunk.getStringPool());
 
@@ -105,6 +106,10 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
     private void setRoot(DefaultMutableTreeNode root) {
         DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
         treeModel.setRoot(root);
+    }
+
+    public void setTableChangedListener(TableChangedListener tableChangedListener) {
+        this.tableChangedListener = tableChangedListener;
     }
 
     @Nullable
@@ -176,11 +181,15 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
     @Override
     public void onEdited(String name, int id) {
         try {
-            selectedNode.setName(String.format("%s (%d)", name, id));
-            selectedNode.setPackageName(name);
-            selectedNode.setId(id);
-            PackageChunk packageChunk = selectedNode.getPackageChunk();
-            packageChunk.setPackageName(name);
+            if (tableChangedListener != null) {
+                selectedNode.setName(String.format("%s (%d)", name, id));
+                selectedNode.setPackageName(name);
+                selectedNode.setId(id);
+                PackageChunk packageChunk = selectedNode.getPackageChunk();
+                packageChunk.setPackageName(name);
+
+                tableChangedListener.tableChanged();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             new ErrorDialog(mainWindow, ex);

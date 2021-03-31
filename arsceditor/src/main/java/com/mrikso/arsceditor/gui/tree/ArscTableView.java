@@ -120,7 +120,6 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
             selectedNode.setValueType(resourceType);
 
             StringPoolChunk poolChunk = ValueHelper.getStringPoolChunk();
-            ResourceTableChunk tableChunk = ValueHelper.getResourceTableChunk();
 
             int index = selectedNode.getEntryIndex();
 
@@ -130,7 +129,7 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
             if (isChildren) {
                 if (resourceType == ValueType.TYPE_STRING) {
                     // update the string value
-                    poolChunk.getStrings().set(selectedNode.getValueIndex(), value);
+                    poolChunk.updateString(selectedNode.getValueIndex(), value);
 
                     // update the name
                     //entry.setKey(selectedNode.getNameIndex(), name);
@@ -141,13 +140,13 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
             } else {
                 if (resourceType == ValueType.TYPE_STRING) {
                     // update the string value
-                    poolChunk.getStrings().set(selectedNode.getValueIndex(), value);
+                    poolChunk.updateString(selectedNode.getValueIndex(), value);
 
                     // update the name
-                    entry.setKey(selectedNode.getNameIndex(), name);
+                    entry.updateKey(selectedNode.getNameIndex(), name);
                 } else if (selectedNode.isComplex()) {
                     // update the name in complex values
-                    entry.setKey(selectedNode.getNameIndex(), name);
+                    entry.updateKey(selectedNode.getNameIndex(), name);
                 } else {
                     // not complex
                     BinaryResourceValue resourceValue = Converter.convertValue(value, resourceType);

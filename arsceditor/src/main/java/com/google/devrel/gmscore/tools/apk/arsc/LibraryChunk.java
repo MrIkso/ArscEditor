@@ -16,6 +16,7 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -23,8 +24,6 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.annotation.Nullable;
 
 /**
  * Contains a list of package-id to package name mappings for any shared libraries used in this
@@ -64,7 +63,7 @@ public final class LibraryChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_LIBRARY;
+    return Type.TABLE_LIBRARY;
   }
 
   @Override

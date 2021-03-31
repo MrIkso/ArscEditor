@@ -16,11 +16,10 @@
 
 package com.google.devrel.gmscore.tools.apk.arsc;
 
+import javax.annotation.Nullable;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import javax.annotation.Nullable;
 
 /** Represents an XML cdata node. */
 public final class XmlCdataChunk extends XmlNodeChunk {
@@ -49,7 +48,7 @@ public final class XmlCdataChunk extends XmlNodeChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_CDATA;
+    return Type.XML_CDATA;
   }
 
   @Override
