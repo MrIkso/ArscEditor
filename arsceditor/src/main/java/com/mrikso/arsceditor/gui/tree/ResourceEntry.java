@@ -6,6 +6,8 @@ public class ResourceEntry extends JTableTreeNode {
     private static final long serialVersionUID = 1L;
     private String name;
     private String value;
+    private String decodedName;
+    private String decodedValue;
     private ValueType valueType;
     private int nameIndex, valueIndex, entryIndex, entryParentIndex = -1;
     private boolean isChildren =true;
@@ -26,6 +28,16 @@ public class ResourceEntry extends JTableTreeNode {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getDecodedName() {
+        return decodedName;
+    }
+
+    @Override
+    public void setDecodedName(String name) {
+        decodedName = name;
     }
 
     @Override
@@ -86,6 +98,16 @@ public class ResourceEntry extends JTableTreeNode {
     @Override
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String getDecodeValue() {
+        return decodedValue;
+    }
+
+    @Override
+    public void setDecodedValue(String value) {
+        decodedValue = value;
     }
 
     @Override

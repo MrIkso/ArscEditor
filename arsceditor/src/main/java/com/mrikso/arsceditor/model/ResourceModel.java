@@ -3,6 +3,7 @@ package com.mrikso.arsceditor.model;
 import com.google.devrel.gmscore.tools.apk.arsc.*;
 import com.mrikso.arsceditor.gui.tree.ResourceDirectory;
 import com.mrikso.arsceditor.gui.tree.ResourceEntry;
+import com.mrikso.arsceditor.util.AttrNameHelper;
 import com.mrikso.arsceditor.util.DecodeGenUtils;
 import com.mrikso.arsceditor.valueeditor.FormatValue;
 import com.mrikso.arsceditor.valueeditor.ValueHelper;
@@ -30,8 +31,9 @@ public class ResourceModel {
     }
 
     public void readTable() {
+        AttrNameHelper nameHelper = AttrNameHelper.getInstance();
         root = new ResourceDirectory(String.format("Resource Table (%s)", tableName));
-        if(type!=null) {
+        if (type != null) {
             for (Map.Entry<Integer, TypeChunk.Entry> entry : type.getEntries().entrySet()) {
                 int entryIndex = entry.getKey();
                 BinaryResourceIdentifier id = BinaryResourceIdentifier.create(packageChunk.getId(), typeSpec.getId(), entry.getKey());
@@ -66,8 +68,10 @@ public class ResourceModel {
 
                             ResourceEntry resourceEntry = new ResourceEntry(idParent);
                             resourceEntry.setName(idParent);
+                            resourceEntry.setDecodedName(nameHelper.getName(key, packageChunk.getPackageName()));
                             resourceEntry.setValue(valueNormal.getValue());
                             resourceEntry.setValueType(valueNormal.getValueType());
+                            resourceEntry.setDecodedValue(valueNormal.getDecodedNamedValue());
                             // value index if value type is string
                             resourceEntry.setValueIndex(valueNormal.getIndex());
 
@@ -85,6 +89,8 @@ public class ResourceModel {
                     if (valueNormal != null) {
                         // set value
                         resourceDirectory.setValue(valueNormal.getValue());
+                        // set decoded value by id2name
+                        resourceDirectory.setDecodedValue(valueNormal.getDecodedNamedValue());
                         // set value type(string, attr, color etc.)
                         resourceDirectory.setValueType(valueNormal.getValueType());
                         // set value index
@@ -98,6 +104,10 @@ public class ResourceModel {
                     if (parentId != 0) {
                         resourceDirectory.setValueType(ValueType.TYPE_REFERENCE);
                         resourceDirectory.setValue(String.format("@0x%1$08x", parentId));
+                        String decodedParentStyle = nameHelper.getName(parentId, packageChunk.getPackageName());
+                        if (decodedParentStyle != null) {
+                            resourceDirectory.setDecodedValue(String.format("@%s", decodedParentStyle));
+                        }
                         resourceDirectory.setValueIndex(-1);
                     }
                 }
@@ -113,7 +123,7 @@ public class ResourceModel {
             return new FormatValue(ValueType.TYPE_STRING, stringPool.getString(value.data()), value.data());
         }
 
-        return DecodeGenUtils.formatValue(value, stringPool);
+        return DecodeGenUtils.formatValue(value, stringPool, packageChunk.getPackageName());
     }
 
     public ResourceDirectory getRoot() {

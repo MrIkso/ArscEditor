@@ -14,10 +14,11 @@ public class PackageEditDialog extends JDialog {
 
         JTextField packageNameFiled = new JTextField(20);
         packageNameFiled.setText(node.getPackageName());
-        packageNameFiled.setEditable(false);
 
         JTextField packageIdField = new JTextField(20);
         packageIdField.setText(String.valueOf(node.getId()));
+        packageIdField.setEditable(false);
+
         // CompactGrid layout is from http://sourceforge.net/projects/swinglib/
         JPanel pFields = new JPanel(new CompactGridLayout(2, 6, 12));
         pFields.add(new JLabel("Package Name:"));

@@ -76,8 +76,11 @@ public class DecodeGenUtils {
 
 
     public static FormatValue formatValue(
-            @NotNull BinaryResourceValue resValue, @Nullable StringPoolChunk stringPool) {
+            @NotNull BinaryResourceValue resValue, @Nullable StringPoolChunk stringPool, String packageName) {
         int data = resValue.data();
+        String decoded;
+
+        AttrNameHelper nameHelper = AttrNameHelper.getInstance();
         //System.out.println(String.format("data: %d, size: %d", data, resValue.size()));
         switch (resValue.type()) {
             case NULL:
@@ -85,15 +88,38 @@ public class DecodeGenUtils {
             case DYNAMIC_ATTRIBUTE:
                 break;
             case DYNAMIC_REFERENCE:
+                decoded = nameHelper.getName(data, packageName);
+                if(decoded != null){
+                    return new FormatValue(ValueType.TYPE_DYNAMIC_REFERENCE, String.format(Locale.US, "@0x%1$08x", data),
+                            String.format("@%s", decoded));
+                }
                 return new FormatValue(ValueType.TYPE_DYNAMIC_REFERENCE, String.format(Locale.US, "@0x%1$08x", data));
             case REFERENCE:
+                decoded = nameHelper.getName(data, packageName);
+                if(decoded != null){
+                    return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$08x", data),
+                            String.format("@%s", decoded));
+                }
                 return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$08x", data));
             case ATTRIBUTE:
+                decoded = nameHelper.getName(data, packageName);
+                if(decoded != null){
+                    return new FormatValue(ValueType.TYPE_ATTRIBUTE, String.format(Locale.US, "?0x%1$x", data),
+                                    String.format("?%s", decoded));
+                }
                 return new FormatValue(ValueType.TYPE_ATTRIBUTE, String.format(Locale.US, "?0x%1$x", data));
             case STRING:
-                return new FormatValue(ValueType.TYPE_STRING, stringPool != null && stringPool.getStringCount() < data
-                        ? stringPool.getString(data)
-                        : String.format(Locale.US, "@string/0x%1$x", data), data);
+                if(stringPool != null && stringPool.getStringCount() < data){
+                    return new FormatValue(ValueType.TYPE_STRING, stringPool.getString(data), data);
+                }else {
+                    // reference string link
+                    decoded = nameHelper.getName(data, packageName);
+                    if(decoded !=null){
+                        return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$x", data), data,
+                                String.format("@%sting/", decoded));
+                    }
+                    return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$x", data), data);
+                }
             case DIMENSION:
                 return new FormatValue(ValueType.TYPE_DIMENSION, decodeComplex(data, false));
             case FRACTION:

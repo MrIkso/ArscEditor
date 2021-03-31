@@ -8,6 +8,8 @@ public class ResourceDirectory extends JTableTreeNode {
     private static final long serialVersionUID = 1L;
     private String value;
     private String name;
+    private String decodedName;
+    private String decodedValue;
     private ValueType valueType;
     private TypeChunk typeChunk;
     private int nameIndex, valueIndex, entryIndex, entryParentIndex = -1;
@@ -24,6 +26,16 @@ public class ResourceDirectory extends JTableTreeNode {
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getDecodedName() {
+        return decodedName;
+    }
+
+    @Override
+    public void setDecodedName(String name) {
+        decodedName = name;
     }
 
     @Override
@@ -91,6 +103,15 @@ public class ResourceDirectory extends JTableTreeNode {
         this.value = value;
     }
 
+    @Override
+    public String getDecodeValue() {
+        return decodedValue;
+    }
+
+    @Override
+    public void setDecodedValue(String value) {
+        decodedValue = value;
+    }
 
     @Override
     public ValueType getValueType() {

@@ -18,6 +18,10 @@ public abstract class JTableTreeNode extends DefaultMutableTreeNode {
 
     public abstract void setName(String name);
 
+    public abstract String getDecodedName();
+
+    public abstract void setDecodedName(String name);
+
     public abstract void setId(String id);
 
     public abstract String getId();
@@ -41,6 +45,10 @@ public abstract class JTableTreeNode extends DefaultMutableTreeNode {
     public abstract String getValue();
 
     public abstract void setValue(String value);
+
+    public abstract String getDecodeValue();
+
+    public abstract void setDecodedValue(String value);
 
     public abstract ValueType getValueType();
 

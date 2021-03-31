@@ -14,6 +14,8 @@ public class ResourceEditDialog extends JDialog implements ItemListener {
     private final String resId;
     private final String resName;
     private final String resValue;
+    private final String resDecodedName;
+    private final String resDecodeValue;
 
     private JTextField nameTextField;
     private JTextArea valueArea;
@@ -28,6 +30,8 @@ public class ResourceEditDialog extends JDialog implements ItemListener {
         resId = defaultMutableTreeNode.getId();
         resName = defaultMutableTreeNode.getName();
         resValue = defaultMutableTreeNode.getValue();
+        resDecodedName = defaultMutableTreeNode.getDecodedName();
+        resDecodeValue = defaultMutableTreeNode.getDecodeValue();
         isComplex =  defaultMutableTreeNode.isComplex();
         isChildren = defaultMutableTreeNode.isChildren();
 
@@ -62,6 +66,16 @@ public class ResourceEditDialog extends JDialog implements ItemListener {
         pFields.add(new JLabel("Name:"));
         pFields.add(nameTextField);
 
+        if(resDecodedName != null) {
+            JTextField decodedNameTextField = new JTextField();
+            decodedNameTextField.setPreferredSize(new Dimension(defaultWidth, nameTextField.getPreferredSize().height));
+            decodedNameTextField.setText(resDecodedName);
+            decodedNameTextField.setEditable(false);
+
+            pFields.add(new JLabel("Decoded Name:"));
+            pFields.add(decodedNameTextField);
+        }
+
         if (valueType != null) {
             String[] smaliSearchTypes = {"String", "Reference",
                     "Attribute", "Color", "Int-dec", "Int-hex", "Boolean", "Float", "Dimension", "Fraction", "DynamicReference"};
@@ -72,9 +86,17 @@ public class ResourceEditDialog extends JDialog implements ItemListener {
             comboBoxTypes.setPreferredSize(new Dimension(defaultWidth, comboBoxTypes.getPreferredSize().height));
             pFields.add(new JLabel("Type:"));
             pFields.add(comboBoxTypes);
-        }
 
-        if (resValue != null) {
+            if(resDecodeValue != null) {
+                JTextField decodedValueTextFiled = new JTextField();
+                decodedValueTextFiled.setPreferredSize(new Dimension(defaultWidth, nameTextField.getPreferredSize().height));
+                decodedValueTextFiled.setText(resDecodeValue);
+                decodedValueTextFiled.setEditable(false);
+
+                pFields.add(new JLabel("Decoded Value:"));
+                pFields.add(decodedValueTextFiled);
+            }
+
             JScrollPane scrollPane;
             if (valueType == ValueType.TYPE_STRING) {
                 valueArea = new JTextArea(resValue, 10, 27);
@@ -87,18 +109,11 @@ public class ResourceEditDialog extends JDialog implements ItemListener {
                 valueArea.setWrapStyleWord(true);
                 valueArea.setFont(idTextFiled.getFont());
                 valueArea.getDocument().putProperty("filterNewLines", Boolean.TRUE);
-                // valueField = new JTextField();
-                // valueField.setPreferredSize(new Dimension(defaultWidth, valueField.getPreferredSize().height));
-                // valueField.setText(resValue);
             }
             scrollPane = new JScrollPane(valueArea);
 
             pFields.add(new JLabel("Value:"));
-            //if (valueType == ValueType.TYPE_STRING) {
             pFields.add(scrollPane);
-            // } else {
-            // pFields.add(valueField);
-            // }
         }
 
         pFields.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));

@@ -1,24 +1,31 @@
 package com.mrikso.arsceditor.gui.tree;
 
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.HashMultimap;
 import com.google.devrel.gmscore.tools.apk.arsc.*;
 import com.mrikso.arsceditor.gui.MainWindow;
 import com.mrikso.arsceditor.gui.dialogs.ErrorDialog;
 import com.mrikso.arsceditor.gui.dialogs.PackageEditDialog;
 import com.mrikso.arsceditor.intrefaces.TableChangedListener;
+import com.mrikso.arsceditor.model.ResId;
 import com.mrikso.arsceditor.model.ResourceModel;
 import com.mrikso.arsceditor.model.ResourceTypeTableModel;
+import com.mrikso.arsceditor.util.AttrNameHelper;
 import com.mrikso.arsceditor.valueeditor.ValueHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ArscTreeView extends JTree implements MouseListener, PackageEditDialog.ValueChangedListener {
@@ -61,6 +68,9 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
             throw new IOException("no res table chunk");
         }
 
+        AttrNameHelper attrNameHelper = AttrNameHelper.getInstance();
+        HashMap<Integer, ResId> attrId = new HashMap<>();
+
         for (Chunk chunk : chunks) {
             ResourceTableChunk resourceTableChunk = (ResourceTableChunk) chunk;
             ValueHelper.setResourceTableChunk(resourceTableChunk);
@@ -78,6 +88,8 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
                     String typeName = typeSpecChunk.getTypeName();
                     ArscNode typeNode = new ArscNode(typeName);
 
+                    int resTypeId = typeSpecChunk.getId();
+
                     // getting all configs from types
                     for (TypeChunk typeChunk : packageChunk.getTypeChunks(typeSpecChunk.getId())) {
                         String config = typeChunk.getConfiguration().toString();
@@ -92,6 +104,14 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
                         configNode.setTypeSpec(typeSpecChunk);
                         configNode.setType(typeChunk);
                         typeNode.add(configNode);
+
+                        // getting all ids on this package
+                        for (Map.Entry<Integer, TypeChunk.Entry> entry : typeChunk.getEntries().entrySet()) {
+                            int entryId = entry.getKey();
+                            int resId = getResId(packageChunk.getId(), resTypeId, entryId);
+                           // System.out.println(String.format("%d = %s, %s", resId, entry.getValue().key(), entry.getValue().typeName()));
+                            attrId.put(resId, new ResId(resId,entry.getValue().key(), entry.getValue().typeName()));
+                        }
                     }
                     resTableNode.add(typeNode);
                 }
@@ -101,9 +121,16 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
 
         }
 
+        attrNameHelper.setAttrPackageMap(attrId);
+    }
+
+    private static int getResId(int packId, int resTypeId, int entryId) {
+        return (((packId) << 24) | (((resTypeId) & 0xFF) << 16) | (entryId & 0xFFFF));
     }
 
     private void setRoot(DefaultMutableTreeNode root) {
+        arscTableView.setModel(new DefaultTableModel());
+
         DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
         treeModel.setRoot(root);
     }
