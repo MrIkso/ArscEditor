@@ -12,7 +12,7 @@ allprojects {
 
     jar {
         manifest {
-            mainAttributes('arseditor-version': appVersion)
+            mainAttributes('arsceditor-version': appVersion)
         }
     }
 }

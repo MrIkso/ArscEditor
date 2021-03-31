@@ -31,7 +31,7 @@ public class VersionUtils {
                 while (resources.hasMoreElements()) {
                     try (InputStream is = resources.nextElement().openStream()) {
                         Manifest manifest = new Manifest(is);
-                        String ver = manifest.getMainAttributes().getValue("arseditor-version");
+                        String ver = manifest.getMainAttributes().getValue("arsceditor-version");
                         if (ver != null) {
                             return ver;
                         }
