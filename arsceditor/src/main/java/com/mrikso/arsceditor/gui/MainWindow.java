@@ -37,6 +37,7 @@ public class MainWindow extends JFrame implements TableChangedListener {
         arscTableView.setTableChangedListener(this);
 
         treeView = new ArscTreeView(this, null, arscTableView);
+        treeView.setTableChangedListener(this);
 
         BorderLayout layout = new BorderLayout();
         JPanel panel = new JPanel();
@@ -197,6 +198,7 @@ public class MainWindow extends JFrame implements TableChangedListener {
             @Override
             protected void done() {
                 try {
+                    saveAs.setEnabled(false);
                     JOptionPane.showMessageDialog(MainWindow.this, "File saved!");
                 } catch (Exception e) {
                     e.printStackTrace();

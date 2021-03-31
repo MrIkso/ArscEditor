@@ -14,6 +14,8 @@ public class PackageEditDialog extends JDialog {
 
         JTextField packageNameFiled = new JTextField(20);
         packageNameFiled.setText(node.getPackageName());
+        packageNameFiled.setEditable(false);
+
         JTextField packageIdField = new JTextField(20);
         packageIdField.setText(String.valueOf(node.getId()));
         // CompactGrid layout is from http://sourceforge.net/projects/swinglib/
