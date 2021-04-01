@@ -128,11 +128,16 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
             // editing children node on complex value
             if (isChildren) {
                 if (resourceType == ValueType.TYPE_STRING) {
-                    // update the string value
-                    poolChunk.updateString(selectedNode.getValueIndex(), value);
+                    if(value.equals("null")){
+                        BinaryResourceValue resourceValue = new BinaryResourceValue(8, BinaryResourceValue.Type.NULL, 1);
+                        entry.updateValue(selectedNode.getEntryChildrenIndex(), resourceValue);
+                    }else {
+                        // update the string value
+                        poolChunk.updateString(selectedNode.getValueIndex(), value);
 
-                    // update the name
-                    //entry.setKey(selectedNode.getNameIndex(), name);
+                        // update the name
+                        //entry.setKey(selectedNode.getNameIndex(), name);
+                    }
                 } else {
                     BinaryResourceValue resourceValue = Converter.convertValue(value, resourceType);
                     entry.updateValue(selectedNode.getEntryChildrenIndex(), resourceValue);
