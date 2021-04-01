@@ -18,9 +18,9 @@
 package com.mrikso.arsceditor.model;
 
 public class ResId {
-    private int id;
-    private String name;
-    private String type;
+    private final int id;
+    private final String name;
+    private final String type;
 
     public ResId(int id, String name, String type){
         this.id = id;

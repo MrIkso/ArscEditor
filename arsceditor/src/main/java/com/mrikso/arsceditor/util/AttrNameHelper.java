@@ -17,8 +17,6 @@
 
 package com.mrikso.arsceditor.util;
 
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.HashMultimap;
 import com.mrikso.arsceditor.model.ResId;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,9 +33,9 @@ import java.util.HashMap;
 
 public class AttrNameHelper {
 
-    private final HashBiMap<Integer, String> attrAndroidMap = HashBiMap.create();
+    private final HashMap<Integer, ResId> attrAndroidMap = new HashMap<>();
 
-    private HashMap<Integer, ResId> attrPackageMap =  new HashMap<>();
+    private HashMap<Integer, ResId> attrPackageMap = new HashMap<>();
 
     public static final String PUBLIC_XML = "public.xml";
     private static AttrNameHelper instance;
@@ -71,11 +69,10 @@ public class AttrNameHelper {
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 String type = element.getAttribute("type");
-                if (type.equals("attr")) {
-                    String name = element.getAttribute("name");
-                    String id = element.getAttribute("id");
-                    attrAndroidMap.put(Integer.decode(id), name);
-                }
+                String name = element.getAttribute("name");
+                String id = element.getAttribute("id");
+                if (!id.isEmpty())
+                    attrAndroidMap.put(Integer.decode(id), new ResId(Integer.decode(id), name, type));
             }
         }
     }
@@ -85,24 +82,31 @@ public class AttrNameHelper {
     }
 
     public String getName(int id, String pkg) {
-        if (!"android".equals(pkg)) {
-            if (attrAndroidMap.containsKey(id)) {
-                return "android:" + attrAndroidMap.get(id);
-            } else if (attrPackageMap.containsKey(id)) {
-                ResId resId = attrPackageMap.get(id);
+        if (attrAndroidMap.containsKey(id)) {
+            ResId resId = attrAndroidMap.get(id);
+            if (resId.getType().equals("attr")) {
+                return "android:" + resId.getName();
+            } else {
+                return "android:" + resId.getType() + "/" + resId.getName();
+            }
+        } else if (attrPackageMap.containsKey(id)) {
+            ResId resId = attrPackageMap.get(id);
+            if (resId.getType().equals("attr")) {
+                return resId.getName();
+            } else {
                 return resId.getType() + "/" + resId.getName();
             }
         }
         return null;
     }
 
-    public int getId(String name, String pkg) {
+    /*public int getId(String name, String pkg) {
         if (!"android".equals(pkg)) {
             if (attrAndroidMap.containsValue(name)) {
                 return attrAndroidMap.inverse().get(name);
             }
         }
         return 0;
-    }
+    }*/
 
 }

@@ -1,11 +1,11 @@
 package com.mrikso.arsceditor.util;
 
+import com.google.devrel.gmscore.tools.apk.arsc.BinaryResourceValue;
+import com.google.devrel.gmscore.tools.apk.arsc.StringPoolChunk;
 import com.mrikso.arsceditor.valueeditor.FormatValue;
 import com.mrikso.arsceditor.valueeditor.ValueType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.google.devrel.gmscore.tools.apk.arsc.BinaryResourceValue;
-import com.google.devrel.gmscore.tools.apk.arsc.StringPoolChunk;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -84,7 +84,7 @@ public class DecodeGenUtils {
         //System.out.println(String.format("data: %d, size: %d", data, resValue.size()));
         switch (resValue.type()) {
             case NULL:
-                return new FormatValue(ValueType.TYPE_STRING, "null");
+                return new FormatValue(ValueType.TYPE_STRING, null);
             case DYNAMIC_ATTRIBUTE:
                 break;
             case DYNAMIC_REFERENCE:
@@ -116,7 +116,7 @@ public class DecodeGenUtils {
                     decoded = nameHelper.getName(data, packageName);
                     if(decoded !=null){
                         return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$x", data), data,
-                                String.format("@%sting/", decoded));
+                                String.format("@%s", decoded));
                     }
                     return new FormatValue(ValueType.TYPE_REFERENCE, String.format(Locale.US, "@0x%1$x", data), data);
                 }

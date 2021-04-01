@@ -1,7 +1,5 @@
 package com.mrikso.arsceditor.gui.tree;
 
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.HashMultimap;
 import com.google.devrel.gmscore.tools.apk.arsc.*;
 import com.mrikso.arsceditor.gui.MainWindow;
 import com.mrikso.arsceditor.gui.dialogs.ErrorDialog;
@@ -109,8 +107,8 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
                         for (Map.Entry<Integer, TypeChunk.Entry> entry : typeChunk.getEntries().entrySet()) {
                             int entryId = entry.getKey();
                             int resId = getResId(packageChunk.getId(), resTypeId, entryId);
-                           // System.out.println(String.format("%d = %s, %s", resId, entry.getValue().key(), entry.getValue().typeName()));
-                            attrId.put(resId, new ResId(resId,entry.getValue().key(), entry.getValue().typeName()));
+                            // System.out.println(String.format("%d = %s, %s", resId, entry.getValue().key(), entry.getValue().typeName()));
+                            attrId.put(resId, new ResId(resId, entry.getValue().key(), entry.getValue().typeName()));
                         }
                     }
                     resTableNode.add(typeNode);
