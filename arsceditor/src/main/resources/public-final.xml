@@ -2816,6 +2816,7 @@
     <public type="attr" name="iconSpaceReserved" id="0x01010561"/>
     <public type="attr" name="defaultFocusHighlightEnabled" id="0x01010562" />
     <public type="attr" name="persistentWhenFeatureAvailable" id="0x01010563"/>
+    <!-- {@deprecated Use windowSplashscreenAnimatedIcon instead } -->
     <public type="attr" name="windowSplashscreenContent" id="0x01010564" />
     <!-- @hide @SystemApi -->
     <public type="attr" name="requiredSystemPropertyName" id="0x01010565" />
@@ -2904,6 +2905,7 @@
     <public type="attr" name="usesNonSdkApi" id="0x0101058e" />
     <public type="attr" name="nonInteractiveUiTimeout" id="0x0101058f" />
     <public type="attr" name="isLightTheme" id="0x01010590" />
+    <!-- {@deprecated Use requiredSplitTypes instead.} -->
     <public type="attr" name="isSplitRequired" id="0x01010591" />
     <public type="attr" name="textLocale" id="0x01010592" />
     <public type="attr" name="settingsSliceUri" id="0x01010593" />
@@ -3026,63 +3028,898 @@
     <public type="bool" name="config_assistantOnTopOfDream" id="0x01110005" />
     <!-- @hide @TestApi -->
     <public type="bool" name="config_remoteInsetsControllerControlsSystemBars" id="0x01110006" />
+
+    <!-- ===============================================================
+     Resources added in version S of the platform
+     =============================================================== -->
+    <eat-comment />
+
+    <public type="attr" name="rollbackDataPolicy" id="0x01010617" />
+    <public type="attr" name="allowClickWhenDisabled" id="0x01010618" />
+    <public type="attr" name="windowLayoutAffinity" id="0x01010619" />
+    <public type="attr" name="canPauseRecording" id="0x0101061a" />
+    <public type="attr" name="windowBlurBehindRadius" id="0x0101061b" />
+    <public type="attr" name="windowBlurBehindEnabled" id="0x0101061c" />
+    <public type="attr" name="requireDeviceScreenOn" id="0x0101061d" />
+    <public type="attr" name="pathSuffix" id="0x0101061e" />
+    <public type="attr" name="sspSuffix" id="0x0101061f" />
+    <public type="attr" name="pathAdvancedPattern" id="0x01010620" />
+    <public type="attr" name="sspAdvancedPattern" id="0x01010621" />
+    <public type="attr" name="fontProviderSystemFontFamily" id="0x01010622" />
+    <public type="attr" name="hand_second" id="0x01010623" />
+    <public type="attr" name="memtagMode" id="0x01010624" />
+    <public type="attr" name="nativeHeapZeroInitialized" id="0x01010625" />
+    <!-- @hide @SystemApi -->
+    <public type="attr" name="hotwordDetectionService" id="0x01010626" />
+    <public type="attr" name="previewLayout" id="0x01010627" />
+    <public type="attr" name="clipToOutline" id="0x01010628" />
+    <!-- <public type="attr" name="__removed3" id="0x01010629" /> -->
+    <public type="attr" name="knownCerts" id="0x0101062a" />
+    <public type="attr" name="windowBackgroundBlurRadius" id="0x0101062b" />
+    <public type="attr" name="windowSplashScreenBackground" id="0x0101062c" />
+    <public type="attr" name="windowSplashScreenAnimatedIcon" id="0x0101062d" />
+    <public type="attr" name="windowSplashScreenAnimationDuration" id="0x0101062e" />
+    <public type="attr" name="windowSplashScreenBrandingImage" id="0x0101062f" />
+    <public type="attr" name="windowSplashScreenIconBackgroundColor" id="0x01010630" />
+    <public type="attr" name="splashScreenTheme" id="0x01010631" />
+    <public type="attr" name="maxResizeWidth" id="0x01010632" />
+    <public type="attr" name="maxResizeHeight" id="0x01010633" />
+    <public type="attr" name="targetCellWidth" id="0x01010634" />
+    <public type="attr" name="targetCellHeight" id="0x01010635" />
+    <public type="attr" name="dialTint" id="0x01010636" />
+    <public type="attr" name="dialTintMode" id="0x01010637" />
+    <public type="attr" name="hand_hourTint" id="0x01010638" />
+    <public type="attr" name="hand_hourTintMode" id="0x01010639" />
+    <public type="attr" name="hand_minuteTint" id="0x0101063a" />
+    <public type="attr" name="hand_minuteTintMode" id="0x0101063b" />
+    <public type="attr" name="hand_secondTint" id="0x0101063c" />
+    <public type="attr" name="hand_secondTintMode" id="0x0101063d" />
+    <public type="attr" name="dataExtractionRules" id="0x0101063e" />
+    <public type="attr" name="passwordsActivity" id="0x0101063f" />
+    <public type="attr" name="selectableAsDefault" id="0x01010640" />
+    <public type="attr" name="isAccessibilityTool" id="0x01010641" />
+    <public type="attr" name="attributionTags" id="0x01010642" />
+    <public type="attr" name="suppressesSpellChecker" id="0x01010643" />
+    <public type="attr" name="usesPermissionFlags" id="0x01010644" />
+    <public type="attr" name="requestRawExternalStorageAccess" id="0x01010645" />
+    <!-- @hide @SystemApi -->
+    <public type="attr" name="playHomeTransitionSound" id="0x01010646" />
+    <public type="attr" name="lStar" id="0x01010647" />
+    <public type="attr" name="showInInputMethodPicker" id="0x01010648" />
+    <public type="attr" name="effectColor" id="0x01010649" />
+    <!-- @hide @TestApi -->
+    <public type="attr" name="requestForegroundServiceExemption" id="0x0101064a" />
+    <public type="attr" name="attributionsAreUserVisible" id="0x0101064b" />
+
+    <public type="color" name="system_neutral1_0" id="0x0106001d" />
+    <public type="color" name="system_neutral1_10" id="0x0106001e" />
+    <public type="color" name="system_neutral1_50" id="0x0106001f" />
+    <public type="color" name="system_neutral1_100" id="0x01060020" />
+    <public type="color" name="system_neutral1_200" id="0x01060021" />
+    <public type="color" name="system_neutral1_300" id="0x01060022" />
+    <public type="color" name="system_neutral1_400" id="0x01060023" />
+    <public type="color" name="system_neutral1_500" id="0x01060024" />
+    <public type="color" name="system_neutral1_600" id="0x01060025" />
+    <public type="color" name="system_neutral1_700" id="0x01060026" />
+    <public type="color" name="system_neutral1_800" id="0x01060027" />
+    <public type="color" name="system_neutral1_900" id="0x01060028" />
+    <public type="color" name="system_neutral1_1000" id="0x01060029" />
+    <public type="color" name="system_neutral2_0" id="0x0106002a" />
+    <public type="color" name="system_neutral2_10" id="0x0106002b" />
+    <public type="color" name="system_neutral2_50" id="0x0106002c" />
+    <public type="color" name="system_neutral2_100" id="0x0106002d" />
+    <public type="color" name="system_neutral2_200" id="0x0106002e" />
+    <public type="color" name="system_neutral2_300" id="0x0106002f" />
+    <public type="color" name="system_neutral2_400" id="0x01060030" />
+    <public type="color" name="system_neutral2_500" id="0x01060031" />
+    <public type="color" name="system_neutral2_600" id="0x01060032" />
+    <public type="color" name="system_neutral2_700" id="0x01060033" />
+    <public type="color" name="system_neutral2_800" id="0x01060034" />
+    <public type="color" name="system_neutral2_900" id="0x01060035" />
+    <public type="color" name="system_neutral2_1000" id="0x01060036" />
+    <public type="color" name="system_accent1_0" id="0x01060037" />
+    <public type="color" name="system_accent1_10" id="0x01060038" />
+    <public type="color" name="system_accent1_50" id="0x01060039" />
+    <public type="color" name="system_accent1_100" id="0x0106003a" />
+    <public type="color" name="system_accent1_200" id="0x0106003b" />
+    <public type="color" name="system_accent1_300" id="0x0106003c" />
+    <public type="color" name="system_accent1_400" id="0x0106003d" />
+    <public type="color" name="system_accent1_500" id="0x0106003e" />
+    <public type="color" name="system_accent1_600" id="0x0106003f" />
+    <public type="color" name="system_accent1_700" id="0x01060040" />
+    <public type="color" name="system_accent1_800" id="0x01060041" />
+    <public type="color" name="system_accent1_900" id="0x01060042" />
+    <public type="color" name="system_accent1_1000" id="0x01060043" />
+    <public type="color" name="system_accent2_0" id="0x01060044" />
+    <public type="color" name="system_accent2_10" id="0x01060045" />
+    <public type="color" name="system_accent2_50" id="0x01060046" />
+    <public type="color" name="system_accent2_100" id="0x01060047" />
+    <public type="color" name="system_accent2_200" id="0x01060048" />
+    <public type="color" name="system_accent2_300" id="0x01060049" />
+    <public type="color" name="system_accent2_400" id="0x0106004a" />
+    <public type="color" name="system_accent2_500" id="0x0106004b" />
+    <public type="color" name="system_accent2_600" id="0x0106004c" />
+    <public type="color" name="system_accent2_700" id="0x0106004d" />
+    <public type="color" name="system_accent2_800" id="0x0106004e" />
+    <public type="color" name="system_accent2_900" id="0x0106004f" />
+    <public type="color" name="system_accent2_1000" id="0x01060050" />
+    <public type="color" name="system_accent3_0" id="0x01060051" />
+    <public type="color" name="system_accent3_10" id="0x01060052" />
+    <public type="color" name="system_accent3_50" id="0x01060053" />
+    <public type="color" name="system_accent3_100" id="0x01060054" />
+    <public type="color" name="system_accent3_200" id="0x01060055" />
+    <public type="color" name="system_accent3_300" id="0x01060056" />
+    <public type="color" name="system_accent3_400" id="0x01060057" />
+    <public type="color" name="system_accent3_500" id="0x01060058" />
+    <public type="color" name="system_accent3_600" id="0x01060059" />
+    <public type="color" name="system_accent3_700" id="0x0106005a" />
+    <public type="color" name="system_accent3_800" id="0x0106005b" />
+    <public type="color" name="system_accent3_900" id="0x0106005c" />
+    <public type="color" name="system_accent3_1000" id="0x0106005d" />
+
+    <public type="dimen" name="system_app_widget_background_radius" id="0x01050008" />
+    <public type="dimen" name="system_app_widget_inner_radius" id="0x01050009" />
+
+    <!-- @hide @SystemApi @TestApi -->
+    <public type="string" name="config_systemAutomotiveCluster" id="0x01040028" />
+    <!-- @hide @SystemApi @TestApi -->
+    <public type="string" name="config_systemAutomotiveProjection" id="0x01040029" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemShell" id="0x0104002a" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemContacts" id="0x0104002b" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_customMediaKeyDispatcher" id="0x0104002c" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_customMediaSessionPolicyProvider" id="0x0104002d" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemSpeechRecognizer" id="0x0104002e" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemWifiCoexManager" id="0x0104002f" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemWellbeing" id="0x01040030" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemTelevisionNotificationHandler" id="0x01040031" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemUiIntelligence" id="0x01040032" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemAmbientAudioIntelligence" id="0x01040033" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemAudioIntelligence" id="0x01040034" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemNotificationIntelligence" id="0x01040035" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemTextIntelligence" id="0x01040036" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemVisualIntelligence" id="0x01040037" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemActivityRecognizer" id="0x01040038" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemCompanionDeviceProvider" id="0x01040039" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_systemUi" id="0x0104003a" />
+    <!-- @hide For use by platform and tools only. Developers should not specify this value. -->
+    <public type="string" name="config_defaultRingtoneVibrationSound" id="0x0104003b" />
+
   <!-- ===============================================================
-       Resources added in version S of the platform
+    Resources added in version S-V2 of the platform
+    =============================================================== -->
+  <eat-comment />
 
-       NOTE: add <public> elements within a <public-group> like so:
+  <staging-public-group-final type="attr" first-id="0x01ff0000">
+    <public name="shouldUseDefaultUnfoldTransition" />
+  </staging-public-group-final>
 
-       <public-group type="attr" first-id="0x01010531">
-           <public name="exampleAttr1" />
-           <public name="exampleAttr2" />
-       </public-group>
+  <public type="attr" name="shouldUseDefaultUnfoldTransition" id="0x0101064c" />
 
-       To add a new public-group block, choose an id value that is 1 greater
-       than the last of that item above. For example, the last "attr" id
-       value above is 0x01010530, so the public-group of attrs below has
-       the id value of 0x01010531.
-       =============================================================== -->
+  <staging-public-group-final type="id" first-id="0x01fe0000">
+    <public name="accessibilityActionDragStart" />
+    <public name="accessibilityActionDragDrop" />
+    <public name="accessibilityActionDragCancel" />
+  </staging-public-group-final>
 
-  <public-group type="attr" first-id="0x01010617">
-    <public name="canPauseRecording" />
-    <!-- attribute definitions go here -->
-    <public name="requireDeviceScreenOn" />
-  </public-group>
-
-  <public-group type="drawable" first-id="0x010800b5">
-    <!-- drawable definitions go here -->
-  </public-group>
-
-  <public-group type="color" first-id="0x0106001d">
-    <!-- color definitions go here -->
-  </public-group>
-
-  <public-group type="dimen" first-id="0x01050008">
-    <!-- dimension definitions go here -->
-  </public-group>
-
-  <public-group type="bool" first-id="0x01110006">
-    <!-- boolean definitions go here -->
-  </public-group>
-
-  <public-group type="style" first-id="0x010302e5">
-    <!-- style definitions go here -->
-  </public-group>
-
-  <public-group type="string" first-id="0x01040028">
-    <!-- string definitions go here -->
-  </public-group>
-
-  <public-group type="id" first-id="0x01020055">
-    <!-- id definitions go here -->
-  </public-group>
+  <public type="id" name="accessibilityActionDragStart" id="0x01020055" />
+  <public type="id" name="accessibilityActionDragDrop" id="0x01020056" />
+  <public type="id" name="accessibilityActionDragCancel" id="0x01020057" />
 
   <!-- ===============================================================
-       DO NOT ADD UN-GROUPED ITEMS HERE
+    Resources added in version T of the platform
 
-       Any new items (attrs, styles, ids, etc.) *must* be added in a
-       public-group block, as the preceding comment explains.
-       Items added outside of a group may have their value recalculated
-       every time something new is added to this file.
-       =============================================================== -->
+    NOTE: After this version of the platform is forked, changes cannot be made to the root
+    branch's groups for that release. Only merge changes to the forked platform branch.
+    =============================================================== -->
+  <eat-comment/>
+
+  <staging-public-group-final type="attr" first-id="0x01df0000">
+    <public name="sharedUserMaxSdkVersion" />
+    <public name="requiredSplitTypes" />
+    <public name="splitTypes" />
+    <public name="canDisplayOnRemoteDevices" />
+    <public name="supportedTypes" />
+    <public name="resetEnabledSettingsOnAppDataCleared" />
+    <public name="supportsStylusHandwriting" />
+    <public name="showClockAndComplications" />
+    <!-- @hide @SystemApi -->
+    <public name="gameSessionService" />
+    <public name="supportsBatteryGameMode" />
+    <public name="supportsPerformanceGameMode" />
+    <public name="allowGameAngleDriver" />
+    <public name="allowGameDownscaling" />
+    <public name="allowGameFpsOverride" />
+    <public name="localeConfig" />
+    <public name="showBackdrop" />
+    <public name="removed_useTargetActivityForQuickAccess"/>
+    <public name="removed_inheritKeyStoreKeys" />
+    <public name="preferKeepClear" />
+    <public name="autoHandwritingEnabled" />
+    <public name="fromExtendLeft" />
+    <public name="fromExtendTop" />
+    <public name="fromExtendRight" />
+    <public name="fromExtendBottom" />
+    <public name="toExtendLeft" />
+    <public name="toExtendTop" />
+    <public name="toExtendRight" />
+    <public name="toExtendBottom" />
+    <public name="tileService" />
+    <public name="windowSplashScreenBehavior" />
+    <public name="allowUntrustedActivityEmbedding" />
+    <public name="knownActivityEmbeddingCerts" />
+    <public name="intro" />
+    <public name="enableOnBackInvokedCallback" />
+    <public name="supportsInlineSuggestionsWithTouchExploration" />
+    <public name="lineBreakStyle" />
+    <public name="lineBreakWordStyle" />
+    <!-- @hide -->
+    <public name="maxDrawableWidth" />
+    <!-- @hide -->
+    <public name="maxDrawableHeight" />
+    <public name="backdropColor" />
+  </staging-public-group-final>
+
+  <public type="attr" name="sharedUserMaxSdkVersion" id="0x0101064d" />
+  <public type="attr" name="requiredSplitTypes" id="0x0101064e" />
+  <public type="attr" name="splitTypes" id="0x0101064f" />
+  <public type="attr" name="canDisplayOnRemoteDevices" id="0x01010650" />
+  <public type="attr" name="supportedTypes" id="0x01010651" />
+  <public type="attr" name="resetEnabledSettingsOnAppDataCleared" id="0x01010652" />
+  <public type="attr" name="supportsStylusHandwriting" id="0x01010653" />
+  <public type="attr" name="showClockAndComplications" id="0x01010654" />
+    <!-- @hide @SystemApi -->
+  <public type="attr" name="gameSessionService" id="0x01010655" />
+  <public type="attr" name="supportsBatteryGameMode" id="0x01010656" />
+  <public type="attr" name="supportsPerformanceGameMode" id="0x01010657" />
+  <public type="attr" name="allowGameAngleDriver" id="0x01010658" />
+  <public type="attr" name="allowGameDownscaling" id="0x01010659" />
+  <public type="attr" name="allowGameFpsOverride" id="0x0101065a" />
+  <public type="attr" name="localeConfig" id="0x0101065b" />
+  <public type="attr" name="showBackdrop" id="0x0101065c" />
+  <public type="attr" name="preferKeepClear" id="0x0101065d" />
+  <public type="attr" name="autoHandwritingEnabled" id="0x0101065e" />
+  <public type="attr" name="fromExtendLeft" id="0x0101065f" />
+  <public type="attr" name="fromExtendTop" id="0x01010660" />
+  <public type="attr" name="fromExtendRight" id="0x01010661" />
+  <public type="attr" name="fromExtendBottom" id="0x01010662" />
+  <public type="attr" name="toExtendLeft" id="0x01010663" />
+  <public type="attr" name="toExtendTop" id="0x01010664" />
+  <public type="attr" name="toExtendRight" id="0x01010665" />
+  <public type="attr" name="toExtendBottom" id="0x01010666" />
+  <public type="attr" name="tileService" id="0x01010667" />
+  <public type="attr" name="windowSplashScreenBehavior" id="0x01010668" />
+  <public type="attr" name="allowUntrustedActivityEmbedding" id="0x01010669" />
+  <public type="attr" name="knownActivityEmbeddingCerts" id="0x0101066a" />
+  <public type="attr" name="intro" id="0x0101066b" />
+  <public type="attr" name="enableOnBackInvokedCallback" id="0x0101066c" />
+  <public type="attr" name="supportsInlineSuggestionsWithTouchExploration" id="0x0101066d" />
+  <public type="attr" name="lineBreakStyle" id="0x0101066e" />
+  <public type="attr" name="lineBreakWordStyle" id="0x0101066f" />
+    <!-- @hide -->
+  <public type="attr" name="maxDrawableWidth" id="0x01010670" />
+    <!-- @hide -->
+  <public type="attr" name="maxDrawableHeight" id="0x01010671" />
+  <public type="attr" name="backdropColor" id="0x01010672" />
+
+  <staging-public-group-final type="id" first-id="0x01de0000">
+    <public name="removed_accessibilityActionSwipeLeft" />
+    <public name="removed_accessibilityActionSwipeRight" />
+    <public name="removed_accessibilityActionSwipeUp" />
+    <public name="removed_accessibilityActionSwipeDown" />
+    <public name="accessibilityActionShowTextSuggestions" />
+    <public name="inputExtractAction" />
+    <public name="inputExtractAccessories" />
+  </staging-public-group-final>
+
+  <public type="id" name="accessibilityActionShowTextSuggestions" id="0x01020058" />
+  <public type="id" name="inputExtractAction" id="0x01020059" />
+  <public type="id" name="inputExtractAccessories" id="0x0102005a" />
+
+  <staging-public-group-final type="style" first-id="0x01dd0000">
+    <public name="TextAppearance.DeviceDefault.Headline" />
+  </staging-public-group-final>
+
+  <public type="style" name="TextAppearance.DeviceDefault.Headline" id="0x010302e5" />
+
+  <staging-public-group-final type="string" first-id="0x01dc0000">
+    <!-- @hide @SystemApi -->
+    <public name="config_systemSupervision" />
+    <!-- @hide @SystemApi -->
+    <public name="config_devicePolicyManagement" />
+    <!-- @hide @SystemApi -->
+    <public name="config_systemAppProtectionService" />
+    <!-- @hide @SystemApi @TestApi -->
+    <public name="config_systemAutomotiveCalendarSyncManager" />
+    <!-- @hide @SystemApi -->
+    <public name="config_defaultAutomotiveNavigation" />
+    <!-- @hide @SystemApi -->
+    <public name="safety_protection_display_text" />
+    <!-- @hide @SystemApi -->
+    <public name="config_systemSettingsIntelligence" />
+    <!-- @hide -->
+    <public name="config_systemBluetoothStack" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemSupervision" id="0x0104003c" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_devicePolicyManagement" id="0x0104003d" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemAppProtectionService" id="0x0104003e" />
+    <!-- @hide @SystemApi @TestApi -->
+  <public type="string" name="config_systemAutomotiveCalendarSyncManager" id="0x0104003f" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_defaultAutomotiveNavigation" id="0x01040040" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="safety_protection_display_text" id="0x01040041" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemSettingsIntelligence" id="0x01040042" />
+    <!-- @hide -->
+  <public type="string" name="config_systemBluetoothStack" id="0x01040043" />
+
+  <staging-public-group-final type="array" first-id="0x01d90000">
+    <!-- @hide @SystemApi -->
+    <public name="config_optionalIpSecAlgorithms" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="array" name="config_optionalIpSecAlgorithms" id="0x01070006" />
+
+  <staging-public-group-final type="drawable" first-id="0x01d80000">
+    <!-- @hide @SystemApi -->
+    <public name="ic_safety_protection" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="drawable" name="ic_safety_protection" id="0x010800b5" />
+
+  <staging-public-group-final type="bool" first-id="0x01cf0000">
+    <!-- @hide @TestApi -->
+    <public name="config_preventImeStartupUnlessTextEditor" />
+    <!-- @hide @SystemApi -->
+    <public name="config_enableQrCodeScannerOnLockScreen" />
+  </staging-public-group-final>
+
+    <!-- @hide @TestApi -->
+  <public type="bool" name="config_preventImeStartupUnlessTextEditor" id="0x01110007" />
+    <!-- @hide @SystemApi -->
+  <public type="bool" name="config_enableQrCodeScannerOnLockScreen" id="0x01110008" />
+
+  <!-- ===============================================================
+    Resources added in version U of the platform
+
+    NOTE: After this version of the platform is forked, changes cannot be made to the root
+    branch's groups for that release. Only merge changes to the forked platform branch.
+    =============================================================== -->
+  <eat-comment/>
+
+  <staging-public-group-final type="attr" first-id="0x01ce0000">
+    <public name="handwritingBoundsOffsetLeft" />
+    <public name="handwritingBoundsOffsetTop" />
+    <public name="handwritingBoundsOffsetRight" />
+    <public name="handwritingBoundsOffsetBottom" />
+    <public name="accessibilityDataSensitive" />
+    <public name="enableTextStylingShortcuts" />
+    <public name="requiredDisplayCategory"/>
+    <public name="removed_maxConcurrentSessionsCount" />
+    <public name="visualQueryDetectionService" />
+    <public name="physicalKeyboardHintLanguageTag" />
+    <public name="physicalKeyboardHintLayoutType" />
+    <public name="allowSharedIsolatedProcess" />
+    <public name="keyboardLocale" />
+    <public name="keyboardLayoutType" />
+    <public name="allowUpdateOwnership" />
+    <public name="isCredential"/>
+    <public name="searchResultHighlightColor" />
+    <public name="focusedSearchResultHighlightColor" />
+    <public name="stylusHandwritingSettingsActivity" />
+    <public name="windowNoMoveAnimation" />
+    <public name="settingsSubtitle" />
+    <public name="capability" />
+  </staging-public-group-final>
+
+  <public type="attr" name="handwritingBoundsOffsetLeft" id="0x01010673" />
+  <public type="attr" name="handwritingBoundsOffsetTop" id="0x01010674" />
+  <public type="attr" name="handwritingBoundsOffsetRight" id="0x01010675" />
+  <public type="attr" name="handwritingBoundsOffsetBottom" id="0x01010676" />
+  <public type="attr" name="accessibilityDataSensitive" id="0x01010677" />
+  <public type="attr" name="enableTextStylingShortcuts" id="0x01010678" />
+  <public type="attr" name="requiredDisplayCategory" id="0x01010679" />
+  <public type="attr" name="visualQueryDetectionService" id="0x0101067a" />
+  <public type="attr" name="physicalKeyboardHintLanguageTag" id="0x0101067b" />
+  <public type="attr" name="physicalKeyboardHintLayoutType" id="0x0101067c" />
+  <public type="attr" name="allowSharedIsolatedProcess" id="0x0101067d" />
+  <public type="attr" name="keyboardLocale" id="0x0101067e" />
+  <public type="attr" name="keyboardLayoutType" id="0x0101067f" />
+  <public type="attr" name="allowUpdateOwnership" id="0x01010680" />
+  <public type="attr" name="isCredential" id="0x01010681" />
+  <public type="attr" name="searchResultHighlightColor" id="0x01010682" />
+  <public type="attr" name="focusedSearchResultHighlightColor" id="0x01010683" />
+  <public type="attr" name="stylusHandwritingSettingsActivity" id="0x01010684" />
+  <public type="attr" name="windowNoMoveAnimation" id="0x01010685" />
+  <public type="attr" name="settingsSubtitle" id="0x01010686" />
+  <public type="attr" name="capability" id="0x01010687" />
+
+  <staging-public-group-final type="id" first-id="0x01cd0000">
+    <public name="bold" />
+    <public name="italic" />
+    <public name="underline" />
+    <public name="accessibilityActionScrollInDirection" />
+  </staging-public-group-final>
+
+  <public type="id" name="bold" id="0x0102005b" />
+  <public type="id" name="italic" id="0x0102005c" />
+  <public type="id" name="underline" id="0x0102005d" />
+  <public type="id" name="accessibilityActionScrollInDirection" id="0x0102005e" />
+
+  <staging-public-group-final type="string" first-id="0x01cb0000">
+    <!-- @hide @SystemApi -->
+    <public name="config_systemWearHealthService" />
+    <!-- @hide @SystemApi -->
+    <public name="config_defaultNotes" />
+    <!-- @hide @SystemApi -->
+    <public name="config_systemFinancedDeviceController" />
+    <!-- @hide @SystemApi -->
+    <public name="config_systemCallStreaming" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemWearHealthService" id="0x01040044" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_defaultNotes" id="0x01040045" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemFinancedDeviceController" id="0x01040046" />
+    <!-- @hide @SystemApi -->
+  <public type="string" name="config_systemCallStreaming" id="0x01040047" />
+
+  <staging-public-group-final type="dimen" first-id="0x01ca0000">
+    <!-- @hide @SystemApi -->
+    <public name="config_viewConfigurationHandwritingGestureLineMargin" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="dimen" name="config_viewConfigurationHandwritingGestureLineMargin" id="0x0105000a" />
+
+  <staging-public-group-final type="color" first-id="0x01c90000">
+    <public name="system_primary_container_light" />
+    <public name="system_on_primary_container_light" />
+    <public name="system_primary_light" />
+    <public name="system_on_primary_light" />
+    <public name="system_secondary_container_light" />
+    <public name="system_on_secondary_container_light" />
+    <public name="system_secondary_light" />
+    <public name="system_on_secondary_light" />
+    <public name="system_tertiary_container_light" />
+    <public name="system_on_tertiary_container_light" />
+    <public name="system_tertiary_light" />
+    <public name="system_on_tertiary_light" />
+    <public name="system_background_light" />
+    <public name="system_on_background_light" />
+    <public name="system_surface_light" />
+    <public name="system_on_surface_light" />
+    <public name="system_surface_container_low_light" />
+    <public name="system_surface_container_lowest_light" />
+    <public name="system_surface_container_light" />
+    <public name="system_surface_container_high_light" />
+    <public name="system_surface_container_highest_light" />
+    <public name="system_surface_bright_light" />
+    <public name="system_surface_dim_light" />
+    <public name="system_surface_variant_light" />
+    <public name="system_on_surface_variant_light" />
+    <public name="system_outline_light" />
+    <public name="system_error_light" />
+    <public name="system_on_error_light" />
+    <public name="system_error_container_light" />
+    <public name="system_on_error_container_light" />
+    <public name="removed_system_primary_fixed_light" />
+    <public name="removed_system_primary_fixed_dim_light" />
+    <public name="removed_system_on_primary_fixed_light" />
+    <public name="removed_system_on_primary_fixed_variant_light" />
+    <public name="removed_system_secondary_fixed_light" />
+    <public name="removed_system_secondary_fixed_dim_light" />
+    <public name="removed_system_on_secondary_fixed_light" />
+    <public name="removed_system_on_secondary_fixed_variant_light" />
+    <public name="removed_system_tertiary_fixed_light" />
+    <public name="removed_system_tertiary_fixed_dim_light" />
+    <public name="removed_system_on_tertiary_fixed_light" />
+    <public name="removed_system_on_tertiary_fixed_variant_light" />
+    <public name="system_control_activated_light" />
+    <public name="system_control_normal_light" />
+    <public name="system_control_highlight_light" />
+    <public name="system_text_primary_inverse_light" />
+    <public name="system_text_secondary_and_tertiary_inverse_light" />
+    <public name="system_text_primary_inverse_disable_only_light" />
+    <public name="system_text_secondary_and_tertiary_inverse_disabled_light" />
+    <public name="system_text_hint_inverse_light" />
+    <public name="system_palette_key_color_primary_light" />
+    <public name="system_palette_key_color_secondary_light" />
+    <public name="system_palette_key_color_tertiary_light" />
+    <public name="system_palette_key_color_neutral_light" />
+    <public name="system_palette_key_color_neutral_variant_light" />
+    <public name="system_primary_container_dark"/>
+    <public name="system_on_primary_container_dark"/>
+    <public name="system_primary_dark"/>
+    <public name="system_on_primary_dark"/>
+    <public name="system_secondary_container_dark"/>
+    <public name="system_on_secondary_container_dark"/>
+    <public name="system_secondary_dark"/>
+    <public name="system_on_secondary_dark"/>
+    <public name="system_tertiary_container_dark"/>
+    <public name="system_on_tertiary_container_dark"/>
+    <public name="system_tertiary_dark"/>
+    <public name="system_on_tertiary_dark"/>
+    <public name="system_background_dark"/>
+    <public name="system_on_background_dark"/>
+    <public name="system_surface_dark"/>
+    <public name="system_on_surface_dark"/>
+    <public name="system_surface_container_low_dark"/>
+    <public name="system_surface_container_lowest_dark"/>
+    <public name="system_surface_container_dark"/>
+    <public name="system_surface_container_high_dark"/>
+    <public name="system_surface_container_highest_dark"/>
+    <public name="system_surface_bright_dark"/>
+    <public name="system_surface_dim_dark"/>
+    <public name="system_surface_variant_dark"/>
+    <public name="system_on_surface_variant_dark"/>
+    <public name="system_outline_dark"/>
+    <public name="system_error_dark"/>
+    <public name="system_on_error_dark"/>
+    <public name="system_error_container_dark"/>
+    <public name="system_on_error_container_dark"/>
+    <public name="removed_system_primary_fixed_dark"/>
+    <public name="removed_system_primary_fixed_dim_dark"/>
+    <public name="removed_system_on_primary_fixed_dark"/>
+    <public name="removed_system_on_primary_fixed_variant_dark"/>
+    <public name="removed_system_secondary_fixed_dark"/>
+    <public name="removed_system_secondary_fixed_dim_dark"/>
+    <public name="removed_system_on_secondary_fixed_dark"/>
+    <public name="removed_system_on_secondary_fixed_variant_dark"/>
+    <public name="removed_system_tertiary_fixed_dark"/>
+    <public name="removed_system_tertiary_fixed_dim_dark"/>
+    <public name="removed_system_on_tertiary_fixed_dark"/>
+    <public name="removed_system_on_tertiary_fixed_variant_dark"/>
+    <public name="system_control_activated_dark"/>
+    <public name="system_control_normal_dark"/>
+    <public name="system_control_highlight_dark"/>
+    <public name="system_text_primary_inverse_dark"/>
+    <public name="system_text_secondary_and_tertiary_inverse_dark"/>
+    <public name="system_text_primary_inverse_disable_only_dark"/>
+    <public name="system_text_secondary_and_tertiary_inverse_disabled_dark"/>
+    <public name="system_text_hint_inverse_dark"/>
+    <public name="system_palette_key_color_primary_dark"/>
+    <public name="system_palette_key_color_secondary_dark"/>
+    <public name="system_palette_key_color_tertiary_dark"/>
+    <public name="system_palette_key_color_neutral_dark"/>
+    <public name="system_palette_key_color_neutral_variant_dark"/>
+    <public name="system_primary_fixed" />
+    <public name="system_primary_fixed_dim" />
+    <public name="system_on_primary_fixed" />
+    <public name="system_on_primary_fixed_variant" />
+    <public name="system_secondary_fixed" />
+    <public name="system_secondary_fixed_dim" />
+    <public name="system_on_secondary_fixed" />
+    <public name="system_on_secondary_fixed_variant" />
+    <public name="system_tertiary_fixed" />
+    <public name="system_tertiary_fixed_dim" />
+    <public name="system_on_tertiary_fixed" />
+    <public name="system_on_tertiary_fixed_variant" />
+    <public name="system_outline_variant_light" />
+    <public name="system_outline_variant_dark" />
+  </staging-public-group-final>
+
+  <public type="color" name="system_primary_container_light" id="0x0106005e" />
+  <public type="color" name="system_on_primary_container_light" id="0x0106005f" />
+  <public type="color" name="system_primary_light" id="0x01060060" />
+  <public type="color" name="system_on_primary_light" id="0x01060061" />
+  <public type="color" name="system_secondary_container_light" id="0x01060062" />
+  <public type="color" name="system_on_secondary_container_light" id="0x01060063" />
+  <public type="color" name="system_secondary_light" id="0x01060064" />
+  <public type="color" name="system_on_secondary_light" id="0x01060065" />
+  <public type="color" name="system_tertiary_container_light" id="0x01060066" />
+  <public type="color" name="system_on_tertiary_container_light" id="0x01060067" />
+  <public type="color" name="system_tertiary_light" id="0x01060068" />
+  <public type="color" name="system_on_tertiary_light" id="0x01060069" />
+  <public type="color" name="system_background_light" id="0x0106006a" />
+  <public type="color" name="system_on_background_light" id="0x0106006b" />
+  <public type="color" name="system_surface_light" id="0x0106006c" />
+  <public type="color" name="system_on_surface_light" id="0x0106006d" />
+  <public type="color" name="system_surface_container_low_light" id="0x0106006e" />
+  <public type="color" name="system_surface_container_lowest_light" id="0x0106006f" />
+  <public type="color" name="system_surface_container_light" id="0x01060070" />
+  <public type="color" name="system_surface_container_high_light" id="0x01060071" />
+  <public type="color" name="system_surface_container_highest_light" id="0x01060072" />
+  <public type="color" name="system_surface_bright_light" id="0x01060073" />
+  <public type="color" name="system_surface_dim_light" id="0x01060074" />
+  <public type="color" name="system_surface_variant_light" id="0x01060075" />
+  <public type="color" name="system_on_surface_variant_light" id="0x01060076" />
+  <public type="color" name="system_outline_light" id="0x01060077" />
+  <public type="color" name="system_error_light" id="0x01060078" />
+  <public type="color" name="system_on_error_light" id="0x01060079" />
+  <public type="color" name="system_error_container_light" id="0x0106007a" />
+  <public type="color" name="system_on_error_container_light" id="0x0106007b" />
+  <public type="color" name="system_control_activated_light" id="0x0106007c" />
+  <public type="color" name="system_control_normal_light" id="0x0106007d" />
+  <public type="color" name="system_control_highlight_light" id="0x0106007e" />
+  <public type="color" name="system_text_primary_inverse_light" id="0x0106007f" />
+  <public type="color" name="system_text_secondary_and_tertiary_inverse_light" id="0x01060080" />
+  <public type="color" name="system_text_primary_inverse_disable_only_light" id="0x01060081" />
+  <public type="color" name="system_text_secondary_and_tertiary_inverse_disabled_light" id="0x01060082" />
+  <public type="color" name="system_text_hint_inverse_light" id="0x01060083" />
+  <public type="color" name="system_palette_key_color_primary_light" id="0x01060084" />
+  <public type="color" name="system_palette_key_color_secondary_light" id="0x01060085" />
+  <public type="color" name="system_palette_key_color_tertiary_light" id="0x01060086" />
+  <public type="color" name="system_palette_key_color_neutral_light" id="0x01060087" />
+  <public type="color" name="system_palette_key_color_neutral_variant_light" id="0x01060088" />
+  <public type="color" name="system_primary_container_dark" id="0x01060089" />
+  <public type="color" name="system_on_primary_container_dark" id="0x0106008a" />
+  <public type="color" name="system_primary_dark" id="0x0106008b" />
+  <public type="color" name="system_on_primary_dark" id="0x0106008c" />
+  <public type="color" name="system_secondary_container_dark" id="0x0106008d" />
+  <public type="color" name="system_on_secondary_container_dark" id="0x0106008e" />
+  <public type="color" name="system_secondary_dark" id="0x0106008f" />
+  <public type="color" name="system_on_secondary_dark" id="0x01060090" />
+  <public type="color" name="system_tertiary_container_dark" id="0x01060091" />
+  <public type="color" name="system_on_tertiary_container_dark" id="0x01060092" />
+  <public type="color" name="system_tertiary_dark" id="0x01060093" />
+  <public type="color" name="system_on_tertiary_dark" id="0x01060094" />
+  <public type="color" name="system_background_dark" id="0x01060095" />
+  <public type="color" name="system_on_background_dark" id="0x01060096" />
+  <public type="color" name="system_surface_dark" id="0x01060097" />
+  <public type="color" name="system_on_surface_dark" id="0x01060098" />
+  <public type="color" name="system_surface_container_low_dark" id="0x01060099" />
+  <public type="color" name="system_surface_container_lowest_dark" id="0x0106009a" />
+  <public type="color" name="system_surface_container_dark" id="0x0106009b" />
+  <public type="color" name="system_surface_container_high_dark" id="0x0106009c" />
+  <public type="color" name="system_surface_container_highest_dark" id="0x0106009d" />
+  <public type="color" name="system_surface_bright_dark" id="0x0106009e" />
+  <public type="color" name="system_surface_dim_dark" id="0x0106009f" />
+  <public type="color" name="system_surface_variant_dark" id="0x010600a0" />
+  <public type="color" name="system_on_surface_variant_dark" id="0x010600a1" />
+  <public type="color" name="system_outline_dark" id="0x010600a2" />
+  <public type="color" name="system_error_dark" id="0x010600a3" />
+  <public type="color" name="system_on_error_dark" id="0x010600a4" />
+  <public type="color" name="system_error_container_dark" id="0x010600a5" />
+  <public type="color" name="system_on_error_container_dark" id="0x010600a6" />
+  <public type="color" name="system_control_activated_dark" id="0x010600a7" />
+  <public type="color" name="system_control_normal_dark" id="0x010600a8" />
+  <public type="color" name="system_control_highlight_dark" id="0x010600a9" />
+  <public type="color" name="system_text_primary_inverse_dark" id="0x010600aa" />
+  <public type="color" name="system_text_secondary_and_tertiary_inverse_dark" id="0x010600ab" />
+  <public type="color" name="system_text_primary_inverse_disable_only_dark" id="0x010600ac" />
+  <public type="color" name="system_text_secondary_and_tertiary_inverse_disabled_dark" id="0x010600ad" />
+  <public type="color" name="system_text_hint_inverse_dark" id="0x010600ae" />
+  <public type="color" name="system_palette_key_color_primary_dark" id="0x010600af" />
+  <public type="color" name="system_palette_key_color_secondary_dark" id="0x010600b0" />
+  <public type="color" name="system_palette_key_color_tertiary_dark" id="0x010600b1" />
+  <public type="color" name="system_palette_key_color_neutral_dark" id="0x010600b2" />
+  <public type="color" name="system_palette_key_color_neutral_variant_dark" id="0x010600b3" />
+  <public type="color" name="system_primary_fixed" id="0x010600b4" />
+  <public type="color" name="system_primary_fixed_dim" id="0x010600b5" />
+  <public type="color" name="system_on_primary_fixed" id="0x010600b6" />
+  <public type="color" name="system_on_primary_fixed_variant" id="0x010600b7" />
+  <public type="color" name="system_secondary_fixed" id="0x010600b8" />
+  <public type="color" name="system_secondary_fixed_dim" id="0x010600b9" />
+  <public type="color" name="system_on_secondary_fixed" id="0x010600ba" />
+  <public type="color" name="system_on_secondary_fixed_variant" id="0x010600bb" />
+  <public type="color" name="system_tertiary_fixed" id="0x010600bc" />
+  <public type="color" name="system_tertiary_fixed_dim" id="0x010600bd" />
+  <public type="color" name="system_on_tertiary_fixed" id="0x010600be" />
+  <public type="color" name="system_on_tertiary_fixed_variant" id="0x010600bf" />
+  <public type="color" name="system_outline_variant_light" id="0x010600c0" />
+  <public type="color" name="system_outline_variant_dark" id="0x010600c1" />
+
+  <staging-public-group-final type="bool" first-id="0x01be0000">
+    <!-- @hide @SystemApi -->
+    <public name="config_safetyProtectionEnabled" />
+    <!-- @hide @SystemApi -->
+    <public name="config_enableDefaultNotes" />
+    <!-- @hide @SystemApi -->
+    <public name="config_enableDefaultNotesForWorkProfile" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi -->
+  <public type="bool" name="config_safetyProtectionEnabled" id="0x01110009" />
+    <!-- @hide @SystemApi -->
+  <public type="bool" name="config_enableDefaultNotes" id="0x0111000a" />
+    <!-- @hide @SystemApi -->
+  <public type="bool" name="config_enableDefaultNotesForWorkProfile" id="0x0111000b" />
+
+  <!-- ===============================================================
+    Resources added in version NEXT of the platform
+
+    NOTE: After this version of the platform is forked, changes cannot be made to the root
+    branch's groups for that release. Only merge changes to the forked platform branch.
+    =============================================================== -->
+  <eat-comment/>
+
+  <staging-public-group-final type="attr" first-id="0x01bd0000">
+    <!-- @FlaggedApi("android.content.res.default_locale") -->
+    <public name="defaultLocale"/>
+    <!-- @FlaggedApi("android.companion.virtual.flags.vdm_custom_ime")
+         @hide @SystemApi -->
+    <public name="isVirtualDeviceOnly"/>
+    <!-- Marking this entry as removed since it's not being finalized -->
+    <public name="removed_optional" />
+    <!-- Marking this entry as removed since it's not being finalized -->
+    <public name="removed_adServiceTypes" />
+    <!-- @hide @SystemApi @FlaggedApi("android.content.res.manifest_flagging") -->
+    <public name="featureFlag"/>
+    <!-- @FlaggedApi("android.multiuser.enable_system_user_only_for_services_and_providers") -->
+    <public name="systemUserOnly"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="allow"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="query"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="queryPrefix"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="queryPattern"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="queryAdvancedPattern"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="querySuffix"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="fragmentPrefix"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="fragmentPattern"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="fragmentAdvancedPattern"/>
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+    <public name="fragmentSuffix"/>
+    <!-- @FlaggedApi("com.android.text.flags.use_bounds_for_width") -->
+    <public name="useBoundsForWidth"/>
+    <!-- @FlaggedApi("android.nfc.nfc_read_polling_loop") -->
+    <public name="autoTransact"/>
+    <!-- @FlaggedApi("com.android.window.flags.enforce_edge_to_edge") -->
+    <public name="windowOptOutEdgeToEdgeEnforcement"/>
+    <!-- @FlaggedApi("android.security.content_uri_permission_apis") -->
+    <public name="requireContentUriPermissionFromCaller" />
+    <!-- Marking this entry as removed since it's not being finalized -->
+    <public name="removed_languageSettingsActivity" />
+    <!-- @FlaggedApi("com.android.text.flags.fix_line_height_for_locale") -->
+    <public name="useLocalePreferredLineHeightForMinimum"/>
+    <!-- @FlaggedApi("android.view.flags.sensitive_content_app_protection_api") -->
+    <public name="contentSensitivity" />
+    <!-- @FlaggedApi("android.view.inputmethod.connectionless_handwriting") -->
+    <public name="supportsConnectionlessStylusHandwriting" />
+    <!-- @FlaggedApi("android.nfc.nfc_observe_mode") -->
+    <public name="shouldDefaultToObserveMode"/>
+    <!-- @FlaggedApi("android.security.asm_restrictions_enabled") -->
+    <public name="allowCrossUidActivitySwitchFromBelow"/>
+    <!-- @FlaggedApi("com.android.text.flags.use_bounds_for_width") -->
+    <public name="shiftDrawingOffsetForStartOverhang" />
+    <!-- @FlaggedApi("android.view.flags.toolkit_set_frame_rate_read_only") -->
+    <public name="windowIsFrameRatePowerSavingsBalanced"/>
+    <!-- Marking this entry as removed since it's not being finalized -->
+    <public name="removed_dreamCategory" />
+  </staging-public-group-final>
+
+    <!-- @FlaggedApi("android.content.res.default_locale") -->
+  <public type="attr" name="defaultLocale" id="0x01010688" />
+    <!-- @FlaggedApi("android.companion.virtual.flags.vdm_custom_ime")
+         @hide @SystemApi -->
+  <public type="attr" name="isVirtualDeviceOnly" id="0x01010689" />
+    <!-- @hide @SystemApi @FlaggedApi("android.content.res.manifest_flagging") -->
+  <public type="attr" name="featureFlag" id="0x0101068c" />
+    <!-- @FlaggedApi("android.multiuser.enable_system_user_only_for_services_and_providers") -->
+  <public type="attr" name="systemUserOnly" id="0x0101068d" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="allow" id="0x0101068e" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="query" id="0x0101068f" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="queryPrefix" id="0x01010690" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="queryPattern" id="0x01010691" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="queryAdvancedPattern" id="0x01010692" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="querySuffix" id="0x01010693" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="fragmentPrefix" id="0x01010694" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="fragmentPattern" id="0x01010695" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="fragmentAdvancedPattern" id="0x01010696" />
+    <!-- @FlaggedApi("android.content.pm.relative_reference_intent_filters") -->
+  <public type="attr" name="fragmentSuffix" id="0x01010697" />
+    <!-- @FlaggedApi("com.android.text.flags.use_bounds_for_width") -->
+  <public type="attr" name="useBoundsForWidth" id="0x01010698" />
+    <!-- @FlaggedApi("android.nfc.nfc_read_polling_loop") -->
+  <public type="attr" name="autoTransact" id="0x01010699" />
+    <!-- @FlaggedApi("com.android.window.flags.enforce_edge_to_edge") -->
+  <public type="attr" name="windowOptOutEdgeToEdgeEnforcement" id="0x0101069a" />
+    <!-- @FlaggedApi("android.security.content_uri_permission_apis") -->
+  <public type="attr" name="requireContentUriPermissionFromCaller" id="0x0101069b" />
+    <!-- @FlaggedApi("com.android.text.flags.fix_line_height_for_locale") -->
+  <public type="attr" name="useLocalePreferredLineHeightForMinimum" id="0x0101069d" />
+    <!-- @FlaggedApi("android.view.flags.sensitive_content_app_protection_api") -->
+  <public type="attr" name="contentSensitivity" id="0x0101069e" />
+    <!-- @FlaggedApi("android.view.inputmethod.connectionless_handwriting") -->
+  <public type="attr" name="supportsConnectionlessStylusHandwriting" id="0x0101069f" />
+    <!-- @FlaggedApi("android.nfc.nfc_observe_mode") -->
+  <public type="attr" name="shouldDefaultToObserveMode" id="0x010106a0" />
+    <!-- @FlaggedApi("android.security.asm_restrictions_enabled") -->
+  <public type="attr" name="allowCrossUidActivitySwitchFromBelow" id="0x010106a1" />
+    <!-- @FlaggedApi("com.android.text.flags.use_bounds_for_width") -->
+  <public type="attr" name="shiftDrawingOffsetForStartOverhang" id="0x010106a2" />
+    <!-- @FlaggedApi("android.view.flags.toolkit_set_frame_rate_read_only") -->
+  <public type="attr" name="windowIsFrameRatePowerSavingsBalanced" id="0x010106a3" />
+
+  <staging-public-group-final type="string" first-id="0x01ba0000">
+    <!-- @hide @SystemApi @FlaggedApi("android.permission.flags.retail_demo_role_enabled") -->
+    <public name="config_defaultRetailDemo" />
+    <!-- @hide @SystemApi @FlaggedApi("android.permission.flags.wallet_role_enabled") -->
+    <public name="config_defaultWallet" />
+  </staging-public-group-final>
+
+    <!-- @hide @SystemApi @FlaggedApi("android.permission.flags.retail_demo_role_enabled") -->
+  <public type="string" name="config_defaultRetailDemo" id="0x01040048" />
+    <!-- @hide @SystemApi @FlaggedApi("android.permission.flags.wallet_role_enabled") -->
+  <public type="string" name="config_defaultWallet" id="0x01040049" />
+
+  <staging-public-group-final type="dimen" first-id="0x01b90000">
+    <!-- System corner radius baseline sizes. Used by Material styling of rounded corner shapes-->
+    <public name="removed_system_corner_radius_xsmall" />
+    <public name="removed_system_corner_radius_small" />
+    <public name="removed_system_corner_radius_medium" />
+    <public name="removed_system_corner_radius_large" />
+    <public name="removed_system_corner_radius_xlarge" />
+  </staging-public-group-final>
+
+    <!-- System corner radius baseline sizes. Used by Material styling of rounded corner shapes-->
+
+  <staging-public-group-final type="color" first-id="0x01b80000">
+    <public name="system_surface_disabled"/>
+    <public name="system_on_surface_disabled"/>
+    <public name="system_outline_disabled"/>
+    <public name="system_error_0"/>
+    <public name="system_error_10"/>
+    <public name="system_error_50"/>
+    <public name="system_error_100"/>
+    <public name="system_error_200"/>
+    <public name="system_error_300"/>
+    <public name="system_error_400"/>
+    <public name="system_error_500"/>
+    <public name="system_error_600"/>
+    <public name="system_error_700"/>
+    <public name="system_error_800"/>
+    <public name="system_error_900"/>
+    <public name="system_error_1000"/>
+  </staging-public-group-final>
+
+  <public type="color" name="system_surface_disabled" id="0x010600c2" />
+  <public type="color" name="system_on_surface_disabled" id="0x010600c3" />
+  <public type="color" name="system_outline_disabled" id="0x010600c4" />
+  <public type="color" name="system_error_0" id="0x010600c5" />
+  <public type="color" name="system_error_10" id="0x010600c6" />
+  <public type="color" name="system_error_50" id="0x010600c7" />
+  <public type="color" name="system_error_100" id="0x010600c8" />
+  <public type="color" name="system_error_200" id="0x010600c9" />
+  <public type="color" name="system_error_300" id="0x010600ca" />
+  <public type="color" name="system_error_400" id="0x010600cb" />
+  <public type="color" name="system_error_500" id="0x010600cc" />
+  <public type="color" name="system_error_600" id="0x010600cd" />
+  <public type="color" name="system_error_700" id="0x010600ce" />
+  <public type="color" name="system_error_800" id="0x010600cf" />
+  <public type="color" name="system_error_900" id="0x010600d0" />
+  <public type="color" name="system_error_1000" id="0x010600d1" />
 
 </resources>

@@ -37,7 +37,7 @@ public class AttrNameHelper {
 
     private HashMap<Integer, ResId> attrPackageMap = new HashMap<>();
 
-    public static final String PUBLIC_XML = "public.xml";
+    public static final String PUBLIC_XML = "public-final.xml";
     private static AttrNameHelper instance;
 
     public static AttrNameHelper getInstance() {
