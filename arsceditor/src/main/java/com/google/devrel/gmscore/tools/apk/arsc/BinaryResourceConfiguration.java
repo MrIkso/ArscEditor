@@ -177,8 +177,7 @@ public class BinaryResourceConfiguration implements SerializableResource {
     public enum Type {
         MCC,
         MNC,
-        LANGUAGE_STRING,
-        REGION_STRING,
+        LOCALE_STRING,
         SCREEN_LAYOUT_DIRECTION,
         SMALLEST_SCREEN_WIDTH_DP,
         SCREEN_WIDTH_DP,
@@ -383,11 +382,41 @@ public class BinaryResourceConfiguration implements SerializableResource {
         return language;
     }
 
-    /**
-     * Returns {@link #language} as an unpacked string representation.
-     */
-    public final String languageString() {
-        return unpackLanguage();
+    /** Java version of appendDirLocale from frameworks/base/libs/androidfw/ResourceTypes.cpp */
+    private String localeString() {
+        String language = unpackLanguage();
+        if (language.isEmpty()) {
+            return language;
+        }
+
+        String region = unpackRegion();
+
+        boolean scriptWasProvided = localeScript[0] != 0;
+        if (!scriptWasProvided && localeVariant[0] == 0) {
+            // Legacy format.
+            if (region.isEmpty()) {
+                return language;
+            } else {
+                return language + "-r" + region;
+            }
+        }
+        // We are writing the modified BCP 47 tag.
+        // It starts with 'b+' and uses '+' as a separator.
+        String locale = "b+" + language;
+        if (scriptWasProvided) {
+            locale += "+" + new String(localeScript, US_ASCII);
+            ;
+        }
+
+        if (!region.isEmpty()) {
+            locale += "+" + region;
+        }
+
+        if (localeVariant[0] != 0) {
+            locale += "+" + new String(localeVariant, US_ASCII);
+        }
+
+        return locale;
     }
 
     /**
@@ -546,6 +575,7 @@ public class BinaryResourceConfiguration implements SerializableResource {
         return unknown;
     }
 
+    /** Returns {@link #language} as an unpacked string representation. */
     private String unpackLanguage() {
         return unpackLanguageOrRegion(language(), 0x61);
     }
@@ -708,8 +738,7 @@ public class BinaryResourceConfiguration implements SerializableResource {
         Map<Type, String> result = new LinkedHashMap<>();  // Preserve order for #toString().
         result.put(Type.MCC, mcc() != 0 ? "mcc" + mcc() : "");
         result.put(Type.MNC, mnc() != 0 ? "mnc" + mnc() : "");
-        result.put(Type.LANGUAGE_STRING, !languageString().isEmpty() ? "" + languageString() : "");
-        result.put(Type.REGION_STRING, !regionString().isEmpty() ? "r" + regionString() : "");
+        result.put(Type.LOCALE_STRING, !localeString().isEmpty() ? localeString() : "");
         result.put(Type.SCREEN_LAYOUT_DIRECTION,
                 getOrDefault(SCREENLAYOUT_LAYOUTDIR_VALUES, screenLayoutDirection(), ""));
         result.put(Type.SMALLEST_SCREEN_WIDTH_DP,

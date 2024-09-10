@@ -48,7 +48,10 @@ public abstract class Chunk implements SerializableResource {
     TABLE_PACKAGE(0x0200),
     TABLE_TYPE(0x0201),
     TABLE_TYPE_SPEC(0x0202),
-    TABLE_LIBRARY(0x0203);
+    TABLE_LIBRARY(0x0203),
+    TABLE_OVERLAYABLE(0x204),
+    TABLE_OVERLAYABLE_POLICY(0x205),
+    TABLE_STAGED_ALIAS(0x206);
 
     private final short code;
 

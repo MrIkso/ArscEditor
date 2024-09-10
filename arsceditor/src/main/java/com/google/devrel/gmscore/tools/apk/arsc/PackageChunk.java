@@ -95,7 +95,7 @@ public final class PackageChunk extends ChunkWithChunks {
                       "Multiple library chunks present in package chunk.");
           }
           libraryChunk = Optional.of((LibraryChunk) chunk);
-      } else if (!(chunk instanceof StringPoolChunk)) {
+      } else if (!(chunk instanceof StringPoolChunk) && !(chunk instanceof UnknownChunk)) {
         throw new IllegalStateException(
             String.format("PackageChunk contains an unexpected chunk: %s", chunk.getClass()));
       }

@@ -74,6 +74,11 @@ public class BinaryResourceIdentifier {
   /** The (0-based) index of the entry in a {@link TypeChunk} containing this resource. */
   public int entryId() { return entryId; }
 
+  /** Returns resource id of the form 0xpptteeee. */
+  public int resourceId() {
+    return packageId << PACKAGE_ID_SHIFT | typeId << TYPE_ID_SHIFT | entryId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -91,7 +96,6 @@ public class BinaryResourceIdentifier {
 
   @Override
   public String toString() {
-    int v = packageId << PACKAGE_ID_SHIFT | typeId << TYPE_ID_SHIFT | entryId;
-    return String.format("0x%1$08x", v);
+    return String.format("0x%1$08x", resourceId());
   }
 }
