@@ -111,7 +111,9 @@ public class ArscTreeView extends JTree implements MouseListener, PackageEditDia
                             attrId.put(resId, new ResId(resId, entry.getValue().key(), entry.getValue().typeName()));
                         }
                     }
-                    resTableNode.add(typeNode);
+                    if (typeNode.children().hasMoreElements()) {
+                        resTableNode.add(typeNode);
+                    }
                 }
 
                 root.add(resTableNode);
