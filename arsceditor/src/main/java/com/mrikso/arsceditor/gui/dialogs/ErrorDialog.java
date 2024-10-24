@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 
 public class ErrorDialog extends JDialog {
 
@@ -15,10 +16,14 @@ public class ErrorDialog extends JDialog {
         textArea.setEditable(false);
         textArea.setText(Throwables.getStackTraceAsString(error));
         textArea.setCaretPosition(0);
+        textArea.setFont(textArea.getFont().deriveFont(12f));
         JScrollPane scrollPane = new JScrollPane(textArea);
+        JButton copyError = new JButton("Copy Error");
+        copyError.addActionListener(l-> copyTextToClipboard(Throwables.getStackTraceAsString(error)));
         JButton okButton = new JButton("OK");
         okButton.addActionListener(l-> setVisible(false));
         JPanel pButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pButtons.add(copyError);
         pButtons.add(okButton);
 
         pContent.add(scrollPane, BorderLayout.CENTER);
@@ -27,7 +32,7 @@ public class ErrorDialog extends JDialog {
         getContentPane().add(pContent);
 
         pack();
-        ///setSize(new Dimension(100, 300));
+        //setSize(new Dimension(100, 300));
         setModal(true);
         setResizable(false);
         setTitle("Error");
@@ -35,4 +40,12 @@ public class ErrorDialog extends JDialog {
         setVisible(true);
     }
 
+    private void copyTextToClipboard(String text){
+        Toolkit.getDefaultToolkit()
+                .getSystemClipboard()
+                .setContents(
+                        new StringSelection(text),
+                        null
+                );
+    }
 }
