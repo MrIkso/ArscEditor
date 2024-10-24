@@ -1,4 +1,4 @@
-ext.appVersion = "1.0.3"
+ext.appVersion = "1.0.4"
 
 allprojects {
     apply plugin: 'java'
