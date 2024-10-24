@@ -165,6 +165,7 @@ public class MainWindow extends JFrame implements TableChangedListener {
                     treeView.setRootWithFile(get(), new File(path).getName());
                 } catch (Exception e) {
                     e.printStackTrace();
+                    new ErrorDialog(MainWindow.this, e);
                 }
             }
         }.execute();
