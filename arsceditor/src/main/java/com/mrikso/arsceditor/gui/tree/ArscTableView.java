@@ -51,7 +51,9 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int row = getTree().getRowForLocation(e.getX(), e.getY());
+        Point p = e.getPoint();
+        int col = this.columnAtPoint(p);
+        int row = this.rowAtPoint(p);
         if (row >= 0) {
            /* if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
                 DefaultMutableTreeNode selectedNode = getSelectedNode();
@@ -69,16 +71,13 @@ public class ArscTableView extends JTreeTable implements MouseListener, Resource
             if (SwingUtilities.isRightMouseButton(e)) {
                 getTree().setSelectionRow(row);
                 selectedNode = getSelectedNode();
-                if (selectedNode != null) {
-                    if (!selectedNode.isRoot()) {
-                        ResourceEditDialog resourceEditDialog = new ResourceEditDialog(mainWindow, selectedNode);
-                        resourceEditDialog.setValueChangedListener(this);
-                        resourceEditDialog.showDialog();
-                    }
+                if (selectedNode != null  && !selectedNode.isRoot()) {
+                    ResourceEditDialog resourceEditDialog = new ResourceEditDialog(mainWindow, selectedNode);
+                    resourceEditDialog.setValueChangedListener(this);
+                    resourceEditDialog.showDialog();
                 }
                 //  popupMenu.show(tree, e.getX(), e.getY());
-            }
-        }
+            }}
     }
 
     @Override

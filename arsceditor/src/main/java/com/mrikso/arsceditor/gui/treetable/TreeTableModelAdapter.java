@@ -11,8 +11,8 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JTree tree;
-	TreeTableModel treeTableModel;
+	private final JTree tree;
+	private final TreeTableModel treeTableModel;
 
 	public TreeTableModelAdapter(TreeTableModel treeTableModel, JTree tree) {
 		this.tree = tree;

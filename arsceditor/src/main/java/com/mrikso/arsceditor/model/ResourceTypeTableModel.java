@@ -34,13 +34,8 @@ public class ResourceTypeTableModel extends DynamicTreeTableModel {
         super(root, columnNames, methodNames, setterMethodNames, classes);
     }
 
+
     @Override
-    public boolean isCellEditable(Object node, int column) {
-        return true;
-    }
-
-
-    /*@Override
     public boolean isCellEditable(Object node, int column) {
         switch (column) {
             case 0:
@@ -49,11 +44,11 @@ public class ResourceTypeTableModel extends DynamicTreeTableModel {
             case 1:
                 // Allow editing of the location, as long as not a
                 // directory
-                return (node instanceof ResourceModel.ResourceEntry);
+                return (node instanceof ResourceModel);
             default:
                 // Don't allow editing of the date fields.
                 return false;
         }
-    }*/
+    }
 
 }
